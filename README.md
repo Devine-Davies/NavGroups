@@ -71,18 +71,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Rhys Devine-Davies** - *Initial work* - [Profile](http://www.mrdevinedavies.co.uk)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Rhys Devine-Davies** - *Profile* - [Profile](http://www.mrdevinedavies.co.uk)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-
