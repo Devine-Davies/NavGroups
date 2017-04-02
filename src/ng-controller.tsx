@@ -1,4 +1,4 @@
-// import { Hooks } from "./hooks";
+import { Hooks } from "./hooks";
 
 declare var window : any;
 
@@ -91,7 +91,7 @@ export class _NgController {
     /*------------------------------------------------------
     */
     constructor(
-        // _Hooks : any = Hooks
+        _Hooks : any = Hooks
     )
     { 
         this.add_window_key_events(); 
@@ -225,24 +225,25 @@ export class _NgController {
     /* ------------------------------------------------------
     * - Analyse instructions
     /* ------------------------------------------------------
-    * -------------------------------------------------------
-    * - ng:*|ni:*              |         | - will move to nav group and item at onces, must start with ng
-    * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    * - ni:next                | default | - next navitem
-    * - ni:prev                | default | - previous navitem
-    * - ni:last                |         | - Go to last item
-    * - ni:first               |         | - Go to first item
-    * - ni:*                   |         | - Go to the given index of an item
-    * - ni:name                |         | - Go to the item with that name
-
-    * - ng:next                | default | - next navgroup
-    * - ng:prev                | default | - previous navgroup
-    * - ng:last                |         | - Go to last selected navgroup
-    * - ni:*                   |         | - Go to the given navgroup by index
-    * - ni:name                |         | - Go to the navgroup by name
-
-    * - hook:*(custom method)  |         | - add custom method to end of arg, must be set up in custom methods
-    * - hook:*(custom method)  |         | - add custom method to end of arg, must be set up in custom methods
+    | Instructions  | is default | Description                                                           |
+    |---------------|------------|-----------------------------------------------------------------------|
+    |               |            |                                                                       |
+    | ng:*|ni:*     |            | will move to nav group and item at onces, must start with ng          |
+    |               |            |                                                                       |
+    | ni:next       | default    | next navitem                                                          |
+    | ni:prev       | default    | previous navitem                                                      |
+    | ni:last       |            | Go to last item                                                       |
+    | ni:first      |            | Go to first item                                                      |
+    | ni:{{#}}      |            | Go to the given index of an item                                      |
+    | ni:{{name}}   |            | Go to the item with that name                                         |
+    |               |            |                                                                       |
+    | ng:next       | default    | next navgroup                                                         |
+    | ng:prev       | default    | previous navgroup                                                     |
+    | ng:last       |            | Go to last selected navgroup                                          |
+    | ng:{{#}}      |            | Go to the given navgroup by index                                     |
+    | ng:{{name}}   |            | Go to the navgroup by name                                            |
+    |               |            |                                                                       |
+    | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
     * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     private analyse_instructions( instruction : string = null )
     {
@@ -299,7 +300,7 @@ export class _NgController {
                 'active_navitem'  : this.active_navitem
             }
 
-            // Hooks.call( instruction, args );
+            Hooks.call( instruction, args );
 
         }
 

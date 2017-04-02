@@ -27,9 +27,9 @@
     display: inline;
     min-width: 75px;
     line-height: 75px;
-    outline: 1px solid red;
-    margin: 10px;
-    padding: 10px;
+    border: 5px solid rgba(255, 0, 0, 0.16);
+    margin: 1rem;
+    padding: 1rem;
     transition: all 0.3s ease;
 } 
 
