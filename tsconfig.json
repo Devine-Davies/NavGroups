@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "removeComments": true,
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "types": ["reflect-metadata"],
+        "target": "es5",
+        "lib": ["es6", "dom"],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "jsx": "react",
+        "module": "commonjs",
+        "outDir": "./dis",
+        "declaration" : true
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+        "node_modules/*",
+        "example/*"
+    ]
+}
