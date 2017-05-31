@@ -1,7 +1,6 @@
 import { Hooks } from "./hooks";
 
-declare var window : any;
-
+declare var document : any;
 
 export class _NgController {
 
@@ -37,6 +36,7 @@ export class _NgController {
         'navgroups' : [],
         'navitems'  : []
     }
+
 
     /*------------------------------------------------------
     * @array

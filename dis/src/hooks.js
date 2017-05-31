@@ -1,18 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var _Hooks = (function () {
     function _Hooks() {
         this._GatewayClient = null;
         this.hook_sets = [
             'custom',
-            'd-hook',
-            'c-hook',
-            'cwc-hook',
         ];
         this.hooks = {
             'custom': {},
-            'd-hook': {},
-            'c-hook': {},
-            'cwc-hook': {},
         };
     }
     _Hooks.prototype.set = function (hook_info) {
@@ -26,23 +21,17 @@ var _Hooks = (function () {
             }
         }
     };
-    ;
-    _Hooks.prototype.call = function (hook_name, args, cwc_metadata) {
+    _Hooks.prototype.call = function (hook_name, args) {
         if (hook_name === void 0) { hook_name = null; }
         if (args === void 0) { args = null; }
-        if (cwc_metadata === void 0) { cwc_metadata = null; }
-        var client_type = this._GatewayClient.get_client_type();
         if (hook_name) {
-            var hook_set_and_name = this.get_hook_set_from_name(hook_name);
-            if (client_type == 'display' && hook_set_and_name.set == 'c-hook') {
-                this.invoke_client_hook(hook_name);
-            }
-            else if (this.hooks[hook_set_and_name.set].hasOwnProperty(hook_set_and_name.name)) {
+            var hook_data = this.get_hook_set_from_name(hook_name);
+            if (this.hooks[hook_data.set].hasOwnProperty(hook_data.name)) {
                 if (args) {
-                    this.hooks[hook_set_and_name.set][hook_set_and_name.name].method(args);
+                    this.hooks[hook_data.set][hook_data.name].method(args);
                 }
                 else {
-                    this.hooks[hook_set_and_name.set][hook_set_and_name.name].method();
+                    this.hooks[hook_data.set][hook_data.name].method();
                 }
             }
         }

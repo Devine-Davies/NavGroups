@@ -10,6 +10,8 @@ const App = () => (
         <aside className="side-menu">
 
             <NavGroup name="menu" direction="vertical" onLeft="" onRight="ng:last"  > 
+            
+                <NavItem>Home</NavItem>
 
                 <NavItem>Movies</NavItem>
 
@@ -76,6 +78,22 @@ const App = () => (
             </NavGroup>
 
             <NavGroup name="with-hook" >
+
+                <NavItem onLeft="ng:menu" >Item</NavItem>
+
+                <NavItem entryPoint >Entry item</NavItem>
+
+                <NavItem >Item</NavItem>
+
+                <NavItem name="hook-item" onEnter="hook:my-custom-hook" >Hook</NavItem>
+
+                <NavItem >Item</NavItem>
+
+                <NavItem onRight="" >Item</NavItem>
+
+            </NavGroup>
+
+            <NavGroup >
 
                 <NavItem onLeft="ng:menu" >Item</NavItem>
 

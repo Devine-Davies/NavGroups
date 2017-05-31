@@ -7,7 +7,7 @@ module.exports = {
     },
     devtool: "source-map",
     resolve: {
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
     module: {
         loaders: [
@@ -15,9 +15,6 @@ module.exports = {
                 test: /\.tsx?$/,
                 loaders: ["awesome-typescript-loader"]
             }
-        ],
-        preLoaders: [
-            { test: /\.js$/, loader: "source-map-loader" }
         ]
     },
 };

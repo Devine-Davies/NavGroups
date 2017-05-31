@@ -1,6 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var hooks_1 = require("./hooks");
 var _NgController = (function () {
-    function _NgController() {
+    function _NgController(_Hooks) {
+        if (_Hooks === void 0) { _Hooks = hooks_1.Hooks; }
         var _this = this;
         this.nav_groups_indexing = [];
         this.nav_groups = {};
@@ -133,6 +136,7 @@ var _NgController = (function () {
                 'active_navgroup': this.active_navgroup,
                 'active_navitem': this.active_navitem
             };
+            hooks_1.Hooks.call(instruction, args);
         }
     };
     _NgController.prototype.move_to_new_nav_group = function (instruction, nav_item_name) {
