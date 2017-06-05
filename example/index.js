@@ -7049,22 +7049,21 @@ var _NgController = (function () {
         this.active_navgroup = null;
         this.active_navitem = null;
         this.history_stack = {
-            'navgroups': [],
-            'navitems': []
+            'navgroups': [], 'navitems': []
         };
         this.keys = {
-            8: function () { _this.key_function('onBack'); },
-            27: function () { _this.key_function('onBack'); },
-            13: function () { _this.key_function('onEnter'); },
-            32: function () { _this.key_function('onEnter'); },
-            87: function () { _this.key_function('onUp'); },
-            38: function () { _this.key_function('onUp'); },
-            83: function () { _this.key_function('onDown'); },
-            40: function () { _this.key_function('onDown'); },
-            65: function () { _this.key_function('onLeft'); },
-            37: function () { _this.key_function('onLeft'); },
-            68: function () { _this.key_function('onRight'); },
-            39: function () { _this.key_function('onRight'); },
+            8: function () { _this.key_invoked('onBack'); },
+            27: function () { _this.key_invoked('onBack'); },
+            13: function () { _this.key_invoked('onEnter'); },
+            32: function () { _this.key_invoked('onEnter'); },
+            87: function () { _this.key_invoked('onUp'); },
+            38: function () { _this.key_invoked('onUp'); },
+            83: function () { _this.key_invoked('onDown'); },
+            40: function () { _this.key_invoked('onDown'); },
+            65: function () { _this.key_invoked('onLeft'); },
+            37: function () { _this.key_invoked('onLeft'); },
+            68: function () { _this.key_invoked('onRight'); },
+            39: function () { _this.key_invoked('onRight'); },
         };
         this.default_actions = {
             'vertical': {
@@ -7082,26 +7081,15 @@ var _NgController = (function () {
         };
         this.add_window_key_events();
     }
-    _NgController.prototype.add_window_key_events = function () {
-        var _this = this;
-        window.addEventListener("keydown", function (event) {
-            var key = event.keyCode || event.which;
-            if (_this.keys.hasOwnProperty(event.keyCode || event.which)) {
-                _this.keys[key]();
-                event.preventDefault();
-            }
-        });
-    };
-    _NgController.prototype.add_new_nav_group = function (nav_group_name, obj) {
-        if (nav_group_name === void 0) { nav_group_name = null; }
-        if (obj === void 0) { obj = null; }
-        this.nav_groups[nav_group_name] = {
-            'obj': obj,
+    _NgController.prototype.add_new_nav_group = function (navgroup_obj) {
+        if (navgroup_obj === void 0) { navgroup_obj = null; }
+        this.nav_groups[navgroup_obj.get_name()] = {
+            'obj': navgroup_obj,
             'nav_items': {},
-            'nav_items_indexing': [],
+            'nav_items_index': [],
             'selected_nav_item': null,
         };
-        this.nav_groups_indexing.push(nav_group_name);
+        this.nav_groups_indexing.push(navgroup_obj.get_name());
     };
     _NgController.prototype.append_new_nav_item = function (nav_group_name, nav_item) {
         if (nav_group_name === void 0) { nav_group_name = null; }
@@ -7115,24 +7103,22 @@ var _NgController = (function () {
             'name': nav_item_name,
             'obj': nav_item
         };
-        this.nav_groups[nav_group_name]['nav_items_indexing'].push(nav_item_name);
+        this.nav_groups[nav_group_name]['nav_items_index'].push(nav_item_name);
         if (nav_item.props.startingPoint) {
             this.move_to_new_nav_group(nav_group_name, nav_item_name);
         }
     };
-    _NgController.prototype.run_instructions = function (instruction) {
-        if (instruction === void 0) { instruction = null; }
-        if (instruction) {
-            this.analyse_instructions(instruction);
-        }
+    _NgController.prototype.add_window_key_events = function () {
+        var _this = this;
+        window.addEventListener("keydown", function (event) {
+            var key = event.keyCode || event.which;
+            if (_this.keys.hasOwnProperty(event.keyCode || event.which)) {
+                _this.keys[key]();
+                event.preventDefault();
+            }
+        });
     };
-    _NgController.prototype.run_action = function (event) {
-        if (event === void 0) { event = null; }
-        if (event) {
-            this.key_function(event);
-        }
-    };
-    _NgController.prototype.key_function = function (event) {
+    _NgController.prototype.key_invoked = function (event) {
         if (event === void 0) { event = null; }
         var default_actions = this.default_actions;
         var instruction = this.active_navitem.fetch_instruction(event);
@@ -7148,29 +7134,29 @@ var _NgController = (function () {
     _NgController.prototype.analyse_instructions = function (instruction) {
         if (instruction === void 0) { instruction = null; }
         var delimiter = ':';
-        var navgroup = 'ng' + delimiter;
-        var navitem = 'ni' + delimiter;
-        var hook = 'hook' + delimiter;
+        var navitem_prefix = 'ni' + delimiter;
+        var navgroup_prefix = 'ng' + delimiter;
+        var hook_prefix = 'hook' + delimiter;
         if (instruction.includes('|') && instruction.startsWith("ng:")) {
             var split = instruction.split("|");
             this.analyse_instructions(split[0]);
             this.analyse_instructions(split[1]);
         }
-        else if (instruction.includes(navitem)) {
-            instruction = instruction.replace(navitem, '');
+        else if (instruction.includes(navitem_prefix)) {
+            instruction = instruction.replace(navitem_prefix, '');
             if (Number(instruction)) {
-                instruction = this.active_navgroup['nav_items_indexing'][Number(instruction) - 1];
+                instruction = this.active_navgroup['nav_items_index'][Number(instruction) - 1];
             }
             this.move_to_new_nav_item(instruction);
         }
-        else if (instruction.includes(navgroup)) {
-            instruction = instruction.replace(navgroup, '');
+        else if (instruction.includes(navgroup_prefix)) {
+            instruction = instruction.replace(navgroup_prefix, '');
             if (Number(instruction)) {
                 instruction = this.nav_groups_indexing[Number(instruction) - 1];
             }
             this.move_to_new_nav_group(instruction);
         }
-        else if (instruction.indexOf(hook) > -1) {
+        else if (instruction.indexOf(hook_prefix) > -1) {
             var args = {
                 'active_navgroup': this.active_navgroup,
                 'active_navitem': this.active_navitem
@@ -7185,8 +7171,8 @@ var _NgController = (function () {
         var next_navgroup_name = instruction;
         if (active_nav_group) {
             var moves = {
-                'prev': this.get_next_prev_nav_group(active_nav_group.obj.get_name(), instruction),
-                'next': this.get_next_prev_nav_group(active_nav_group.obj.get_name(), instruction),
+                'prev': this.get_next_nav_group(active_nav_group.obj.get_name(), instruction),
+                'next': this.get_next_nav_group(active_nav_group.obj.get_name(), instruction),
                 'last': this.history_stack['navgroups'][this.history_stack['navgroups'].length - 2]
             };
             if (moves.hasOwnProperty(instruction)) {
@@ -7209,33 +7195,31 @@ var _NgController = (function () {
     _NgController.prototype.move_to_new_nav_item = function (instruction) {
         if (instruction === void 0) { instruction = null; }
         var active_group = this.active_navgroup;
-        var items_to_move_to = {
-            'next': this.get_next_prev_nav_item(active_group['selected_nav_item'], 'next'),
-            'prev': this.get_next_prev_nav_item(active_group['selected_nav_item'], 'prev'),
-            'first': active_group['nav_items_indexing'][0],
-            'last': active_group['nav_items_indexing'][active_group['nav_items_indexing'].length - 1],
+        var possible_moves = {
+            'next': this.get_next_nav_item(active_group['selected_nav_item'], 'next'),
+            'prev': this.get_next_nav_item(active_group['selected_nav_item'], 'prev'),
+            'first': active_group['nav_items_index'][0],
+            'last': active_group['nav_items_index'][active_group['nav_items_index'].length - 1],
+            "move_by_name": this.get_item_in_group(instruction),
             'last_selected': active_group['selected_nav_item'],
             'item_entry_point': active_group['item_entry_point']
         };
-        if (this.item_in_group(instruction) != false) {
+        if (possible_moves["move_by_name"] != false) {
             active_group['selected_nav_item'] = instruction;
         }
         else if (instruction != null) {
-            if (items_to_move_to.hasOwnProperty(instruction)) {
-                active_group['selected_nav_item'] = items_to_move_to[instruction];
+            if (possible_moves.hasOwnProperty(instruction)) {
+                active_group['selected_nav_item'] = possible_moves[instruction];
             }
         }
-        else if (items_to_move_to['item_entry_point']) {
-            active_group['selected_nav_item'] = items_to_move_to['item_entry_point'];
+        else if (possible_moves['item_entry_point']) {
+            active_group['selected_nav_item'] = possible_moves['item_entry_point'];
         }
         else if (active_group.obj.get_history_item()) {
-            active_group['selected_nav_item'] = items_to_move_to['last_selected'];
-        }
-        else {
-            active_group['selected_nav_item'] = items_to_move_to['first'];
+            active_group['selected_nav_item'] = possible_moves['last_selected'];
         }
         if (active_group['selected_nav_item'] == null) {
-            active_group['selected_nav_item'] = items_to_move_to['first'];
+            active_group['selected_nav_item'] = possible_moves['first'];
         }
         if (this.active_navitem) {
             this.active_navitem.toggle_active();
@@ -7245,23 +7229,17 @@ var _NgController = (function () {
         this.history_stack['navitems'].push(this.active_navitem.get_name());
         active_group.obj.indicate_active_item(this.active_navitem.get_name(), this.active_navitem.was_given_name());
     };
-    _NgController.prototype.item_in_group = function (item_name) {
+    _NgController.prototype.get_item_in_group = function (item_name) {
         if (item_name === void 0) { item_name = null; }
         var active_group = this.active_navgroup;
-        if (item_name) {
-            return active_group.nav_items.hasOwnProperty(item_name);
+        if (active_group) {
+            if (item_name) {
+                return active_group.nav_items.hasOwnProperty(item_name);
+            }
         }
         return false;
     };
-    _NgController.prototype.swap_active_item = function (item_name) {
-        if (item_name === void 0) { item_name = null; }
-        if (item_name) {
-            console.log("this.active_navgroup['selected_nav_item']");
-            console.log(this.active_navgroup['selected_nav_item']);
-            console.log(item_name != this.active_navgroup['selected_nav_item']);
-        }
-    };
-    _NgController.prototype.get_next_prev_nav_group = function (nav_group_name, dir) {
+    _NgController.prototype.get_next_nav_group = function (nav_group_name, dir) {
         if (nav_group_name === void 0) { nav_group_name = null; }
         if (dir === void 0) { dir = 'next'; }
         var ng_indexing = this.nav_groups_indexing;
@@ -7280,13 +7258,13 @@ var _NgController = (function () {
         }
         return ng_indexing[(next_nav)];
     };
-    _NgController.prototype.get_next_prev_nav_item = function (nav_item_name, dir) {
+    _NgController.prototype.get_next_nav_item = function (nav_item_name, direction) {
         if (nav_item_name === void 0) { nav_item_name = null; }
-        if (dir === void 0) { dir = 'next'; }
-        var ni_indexing = this.active_navgroup['nav_items_indexing'];
+        if (direction === void 0) { direction = 'next'; }
+        var ni_indexing = this.active_navgroup['nav_items_index'];
         var at_pos = ni_indexing.indexOf(nav_item_name);
         var next_item = at_pos;
-        next_item = (dir == 'next') ? next_item += 1 : next_item -= 1;
+        next_item = (direction == 'next') ? next_item += 1 : next_item -= 1;
         var constraint = {
             under: (next_item < 0),
             over: (next_item == ni_indexing.length),
@@ -10313,7 +10291,7 @@ var NavGroup = (function (_super) {
         if (this.props.name) {
             this.nav_group.classList.add(this.nav_group_name);
         }
-        this._NgController.add_new_nav_group(this.nav_group_name, this);
+        this._NgController.add_new_nav_group(this);
         for (var ref in this.refs) {
             var item = this.refs[ref];
             if (item.constructor.name == 'NavItem') {
@@ -10330,7 +10308,7 @@ var NavGroup = (function (_super) {
         if (instruction === void 0) { instruction = ''; }
         var props = this.props;
         if (props.hasOwnProperty(instruction)) {
-            return (props[instruction]);
+            return String(props[instruction]);
         }
         return null;
     };

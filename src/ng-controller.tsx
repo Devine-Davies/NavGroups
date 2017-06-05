@@ -33,10 +33,8 @@ export class _NgController {
     * Keep an index od the order they come in
     */
     history_stack : any = {
-        'navgroups' : [],
-        'navitems'  : []
+        'navgroups' : [], 'navitems'  : []
     }
-
 
     /*------------------------------------------------------
     * @array
@@ -44,28 +42,28 @@ export class _NgController {
     */
     keys : any = {
         /* -- Backspace & ESC -- */
-        8  : () => { this.key_function( 'onBack' ) },
-        27 : () => { this.key_function( 'onBack' ) },
+        8  : () => { this.key_invoked( 'onBack' ) },
+        27 : () => { this.key_invoked( 'onBack' ) },
 
         /* -- Enter & Space -- */
-        13 : () => { this.key_function( 'onEnter' ) },
-        32 : () => { this.key_function( 'onEnter' ) },
+        13 : () => { this.key_invoked( 'onEnter' ) },
+        32 : () => { this.key_invoked( 'onEnter' ) },
 
         /* -- W & up -- */
-        87 : () => { this.key_function( 'onUp' ) },
-        38 : () => { this.key_function( 'onUp' ) },
+        87 : () => { this.key_invoked( 'onUp' ) },
+        38 : () => { this.key_invoked( 'onUp' ) },
 
         /* -- S & down -- */
-        83 : () => { this.key_function( 'onDown' ) },
-        40 : () => { this.key_function( 'onDown' ) },
+        83 : () => { this.key_invoked( 'onDown' ) },
+        40 : () => { this.key_invoked( 'onDown' ) },
 
         /* -- A & left -- */
-        65 : () => { this.key_function( 'onLeft' ) },
-        37 : () => { this.key_function( 'onLeft' ) },
+        65 : () => { this.key_invoked( 'onLeft' ) },
+        37 : () => { this.key_invoked( 'onLeft' ) },
 
         /* -- D & right -- */
-        68 : () => { this.key_function( 'onRight' ) },
-        39 : () => { this.key_function( 'onRight' ) },
+        68 : () => { this.key_invoked( 'onRight' ) },
+        39 : () => { this.key_invoked( 'onRight' ) },
     };
 
     /*------------------------------------------------------
@@ -93,49 +91,36 @@ export class _NgController {
     constructor(
         _Hooks : any = Hooks
     )
-    { 
-        this.add_window_key_events(); 
-    }
+    {  this.add_window_key_events();  }
 
-    /*------------------------------------------------------
-    * @function - Add window key events
-    * @info - Add window key-binds for Navgroup
-    * @conditions set - Only if Navitems found
+    /*-----------------------------------------------------
+    * @function - Add new nav group
+    * @info - Adds a new navgrouop to the class
+    * @navgroup_obj - is the class/obj of the navgroup item
     */
-    private add_window_key_events()
+    public add_new_nav_group( navgroup_obj : any = null )
     {
-        window.addEventListener("keydown", ( event : any ) =>
-        {
-            var key = event.keyCode || event.which;
-
-            /* -- Find if the key is in our object -- */
-            if ( this.keys.hasOwnProperty( event.keyCode || event.which ) )
-            {
-                this.keys[key]()
-                event.preventDefault();
-            }
-        });
-
-    }
-
-    /*------------------------------------------------------
-    */
-    public add_new_nav_group( nav_group_name : string = null, obj : any = null )
-    {
-        this.nav_groups[ nav_group_name ] = {
-            'obj'                : obj,
+        /* -- Set up thje core object for the navgroup item -- */
+        this.nav_groups[ navgroup_obj.get_name() ] = {
+            'obj'                : navgroup_obj,
             'nav_items'          : {},
-            'nav_items_indexing' : [],
+            'nav_items_index'    : [],
             'selected_nav_item'  : null,
         }
 
+        /* -- Keep a record of the index in which the nagrouo come in as -- */
         this.nav_groups_indexing.push(
-            nav_group_name
+            navgroup_obj.get_name()
         );
-
     }
 
-    /*------------------------------------------------------
+    /*-----------------------------------------------------
+    * @function - Append new nav item
+    * @info - Adds a new navitem to an exsisting navgroup 
+    * @conditions set - Only if Navitems found
+    * -----------------------------------------------------
+    * [attr] = startingPoint? : boolean; - is the main starting point of the app;
+    * [attr] = entryPoint?    : boolean; - When the new navgro is enterd, is the first item it will find;
     */
     public append_new_nav_item( nav_group_name : string = null, nav_item : any = null )
     {
@@ -155,9 +140,9 @@ export class _NgController {
         };
 
         /* -- Add to indexing -- */
-        this.nav_groups[ nav_group_name ]['nav_items_indexing'].push(
+        this.nav_groups[ nav_group_name ]['nav_items_index'].push(
             nav_item_name
-        )
+        );
 
         /* -- Safe the ref to the group and item for starting -- */
         if( nav_item.props.startingPoint )
@@ -170,37 +155,36 @@ export class _NgController {
     }
 
     /*------------------------------------------------------
+    * @function - Add window key events
+    * @info - Add window key-binds for Navgroup
+    * @conditions set - Only if Navitems found
     */
-    public run_instructions( instruction : string = null )
+    private add_window_key_events()
     {
-        if( instruction )
+        window.addEventListener("keydown", ( event : any ) =>
         {
-            this.analyse_instructions(
-                instruction
-            );
-        }
+            var key = event.keyCode || event.which;
+
+            /* -- Find if the key is in our object -- */
+            if ( this.keys.hasOwnProperty( event.keyCode || event.which ) )
+            {
+                this.keys[ key ]()
+                event.preventDefault();
+            }
+        });
+
     }
 
     /*------------------------------------------------------
+    * Key invoked
+    * @desc : Function to set up keybindings for the componant
     */
-    public run_action( event : string = null )
+    private key_invoked( event : string = null )
     {
-        if( event )
-        {
-            this.key_function(
-                event
-            );
-        }
-    }
-
-    /*------------------------------------------------------
-    */
-    private key_function( event : string = null )
-    {
-        /* --  -- */
+        /* -- default ket bindings -- */
         let default_actions : any = this.default_actions;
 
-        /* --  First check to see if nav item has instruction -- */
+        /* --  First check to see if navitem has instruction -- */
         let instruction = this.active_navitem.fetch_instruction( event );
 
         /* -- if not use nav group -- */
@@ -219,7 +203,6 @@ export class _NgController {
                 instruction
             );
         }
-
     }
 
     /* ------------------------------------------------------
@@ -247,11 +230,10 @@ export class _NgController {
     * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
     private analyse_instructions( instruction : string = null )
     {
-        let delimiter : string  = ':';
-        let navgroup  : string  = 'ng'   + delimiter;
-        let navitem   : string  = 'ni'   + delimiter;
-        let hook      : string  = 'hook' + delimiter;
-
+        let delimiter       : string  = ':';
+        let navitem_prefix  : string  = 'ni'   + delimiter;
+        let navgroup_prefix : string  = 'ng'   + delimiter;
+        let hook_prefix     : string  = 'hook' + delimiter;
 
         if( instruction.includes( '|' ) && instruction.startsWith("ng:") )
         {
@@ -263,14 +245,14 @@ export class _NgController {
         }
 
         /* -- Move to item -- */
-        else if( instruction.includes( navitem ) )
+        else if( instruction.includes( navitem_prefix ) )
         {
-            instruction = instruction.replace( navitem , '');
+            instruction = instruction.replace( navitem_prefix , '');
 
             /* -- If passing a number find name of nav group -- */
             if( Number( instruction ) )
             {
-                instruction = this.active_navgroup['nav_items_indexing'][ Number( instruction ) - 1 ];
+                instruction = this.active_navgroup['nav_items_index'][ Number( instruction ) - 1 ];
             }
 
             this.move_to_new_nav_item( instruction );
@@ -278,9 +260,9 @@ export class _NgController {
         }
 
         /* -- Move to nav group -- */
-        else if( instruction.includes( navgroup ) )
+        else if( instruction.includes( navgroup_prefix ) )
         {
-            instruction = instruction.replace( navgroup , '');
+            instruction = instruction.replace( navgroup_prefix , '');
 
             /* -- If passing a number find name of nav group -- */
             if( Number( instruction ) )
@@ -293,7 +275,7 @@ export class _NgController {
         }
 
         /* -- Let's invoke a hook -- */
-        else if( instruction.indexOf( hook ) > -1 )
+        else if( instruction.indexOf( hook_prefix ) > -1 )
         {
             let args = {
                 'active_navgroup' : this.active_navgroup,
@@ -307,6 +289,9 @@ export class _NgController {
     }
 
     /*------------------------------------------------------
+    * Move to new nav group
+    * @instruction - based in the ng info on the table above ( analyse_instructions )
+    * @nav_item_name - the name of the item in the active_nav_group
     */
     private move_to_new_nav_group( instruction : string = null, nav_item_name : string = null )
     {
@@ -317,8 +302,8 @@ export class _NgController {
         {
             let moves : any = {
                 /* -- Looking for either the next or previous nav group -- */
-                'prev' : this.get_next_prev_nav_group( active_nav_group.obj.get_name(), instruction ),
-                'next' : this.get_next_prev_nav_group( active_nav_group.obj.get_name(), instruction ),
+                'prev' : this.get_next_nav_group( active_nav_group.obj.get_name(), instruction ),
+                'next' : this.get_next_nav_group( active_nav_group.obj.get_name(), instruction ),
 
                 /* -- Looking for either the next or previous nav group -- */
                 'last' : this.history_stack['navgroups'][ this.history_stack['navgroups'].length - 2 ]
@@ -358,24 +343,29 @@ export class _NgController {
     }
 
     /*------------------------------------------------------
+    * Move to new nav item
+    * @instruction - based in the ni info on the table above ( analyse_instructions )
     */
     private move_to_new_nav_item( instruction : string = null )
     {
         let active_group : any = this.active_navgroup;
 
-        /* -- prepare all the item they we could move to -- */
-        let items_to_move_to : any = {
-            'next'             : this.get_next_prev_nav_item( active_group['selected_nav_item'], 'next' ),
-            'prev'             : this.get_next_prev_nav_item( active_group['selected_nav_item'], 'prev' ),
-
-            'first'            : active_group['nav_items_indexing'][ 0 ],
-            'last'             : active_group['nav_items_indexing'][ active_group['nav_items_indexing'].length - 1 ],
+        /* -- prepare all the item that we could move to -- */
+        let possible_moves : any = {
+            /* -- Core movments -- */
+            'next'   : this.get_next_nav_item( active_group['selected_nav_item'], 'next' ),
+            'prev'   : this.get_next_nav_item( active_group['selected_nav_item'], 'prev' ),
+            'first'  : active_group['nav_items_index'][ 0 ],
+            'last'   : active_group['nav_items_index'][ active_group['nav_items_index'].length - 1 ],
+            
+            /* -- Spechial movments -- */
+            "move_by_name"     : this.get_item_in_group( instruction ),
             'last_selected'    : active_group['selected_nav_item'],
-            'item_entry_point' : active_group['item_entry_point'] 
+            'item_entry_point' : active_group['item_entry_point']
         }
-
-        /* -- Move to item name if given -- */
-        if( this.item_in_group( instruction ) != false )
+        
+        /* -- Move to item of a given name -- */
+        if( possible_moves[ "move_by_name" ] != false )
         {
             active_group['selected_nav_item'] = instruction;
         }
@@ -384,34 +374,29 @@ export class _NgController {
         else if( instruction != null )
         {
             /* -- Looking for either the next or previous nav group -- */
-            if( items_to_move_to.hasOwnProperty( instruction ) )
+            if( possible_moves.hasOwnProperty( instruction ) )
             {
-                active_group['selected_nav_item'] = items_to_move_to[ instruction ];
+                active_group['selected_nav_item'] = possible_moves[ instruction ];
             }
         }
 
         /* -- See if this group have been given an item as an entry point -- */
-        else if( items_to_move_to['item_entry_point'] )
+        else if( possible_moves['item_entry_point'] )
         {
-            active_group['selected_nav_item'] = items_to_move_to['item_entry_point'];
+            active_group['selected_nav_item'] = possible_moves['item_entry_point'];
         }
 
         /* -- if history item for this group is true, then lets move to that one -- */
         else if( active_group.obj.get_history_item() )
         {
-            active_group['selected_nav_item'] = items_to_move_to['last_selected'];
+            active_group['selected_nav_item'] = possible_moves['last_selected'];
         }
 
         /* -- If no position have been given then let's move to the first item -- */
-        else
-        {
-            active_group['selected_nav_item'] = items_to_move_to['first'];
-        }
-
         /* -- If we still haven't got an item to move to - lets just go to the first item -- */
         if( active_group['selected_nav_item'] == null )
         {
-            active_group['selected_nav_item'] = items_to_move_to['first'];
+            active_group['selected_nav_item'] = possible_moves['first'];
         }
 
         /* -- Turn off the current item | if one has been set-- */
@@ -423,7 +408,7 @@ export class _NgController {
         /* -- Update the navitem object -- */
         this.active_navitem = active_group['nav_items'][ active_group['selected_nav_item'] ].obj;
 
-        /* -- Add to the history stack -- */
+        /* -- AddMake the last active item unacitve -- */
         this.active_navitem.toggle_active();
 
         /* -- Add to the history stack -- */
@@ -440,34 +425,30 @@ export class _NgController {
     }
 
     /*------------------------------------------------------
+    * Get item in group
+    * @item_name - the name of the navitem you wish to use
     */
-    private item_in_group( item_name : string = null ) : boolean 
+    private get_item_in_group( item_name : string = null ) : boolean 
     {
         let active_group : any = this.active_navgroup;
 
-        if( item_name )
+        if( active_group )
         {
-            return active_group.nav_items.hasOwnProperty( item_name );
+            if( item_name )
+            {
+                return active_group.nav_items.hasOwnProperty( item_name );
+            }
         }
 
         return false;
     }
 
     /*------------------------------------------------------
+    * Get next nav item
+    * @nav_group_name - the name of the navgroup you wish to use
+    * @direction - {{ next }} or {{ previous }}
     */
-    private swap_active_item( item_name : string = null )
-    {
-        if( item_name )
-        {
-            console.log( "this.active_navgroup['selected_nav_item']" );
-            console.log( this.active_navgroup['selected_nav_item'] );
-            console.log( item_name != this.active_navgroup['selected_nav_item'] ) 
-        }
-    }
-
-    /*------------------------------------------------------
-    */
-    private get_next_prev_nav_group( nav_group_name : string = null, dir : string = 'next' ) : string
+    private get_next_nav_group( nav_group_name : string = null, dir : string = 'next' ) : string
     {
         let ng_indexing : string[] = this.nav_groups_indexing;
         let at_pos      : number   = this.nav_groups_indexing.indexOf( nav_group_name );
@@ -498,31 +479,38 @@ export class _NgController {
     }
 
     /*------------------------------------------------------
+    * Get next nav item
+    * @nav_item_name - the name of the navitem you wish to use
+    * @direction - {{ next }} or {{ previous }}
     */
-    private get_next_prev_nav_item( nav_item_name : string = null, dir : string = 'next'  ) : any
+    private get_next_nav_item( nav_item_name : string = null, direction : string = 'next'  ) : any
     {
-        let ni_indexing : string[] = this.active_navgroup['nav_items_indexing'];
+        let ni_indexing : string[] = this.active_navgroup['nav_items_index'];
         let at_pos      : number   = ni_indexing.indexOf( nav_item_name );
         let next_item   : number   = at_pos;
 
         /* -- Update depending on direction -- */
-        next_item = ( dir == 'next' )? next_item += 1 : next_item -= 1; 
+        next_item = ( direction == 'next' )? next_item += 1 : next_item -= 1; 
 
-        /* -- Nav constraints -- */
+        /* -- Constraints to check -- */
         var constraint = {
             under : ( next_item < 0 ),
             over  : ( next_item == ni_indexing.length ),
         }
 
-        /* -- Move to last nav group -- */
-        if( constraint.under ) { next_item = ni_indexing.length - 1; }
-
-        /* -- Move to first nav group  -- */
-        else if ( constraint.over ) { next_item = 0; }
+        if( constraint.under ) 
+        { 
+            /* -- Move to last nav group -- */
+            next_item = ni_indexing.length - 1; 
+        }
+        else if ( constraint.over ) 
+        {
+            /* -- Move to first nav group  -- */
+            next_item = 0; 
+        }
 
         /* -- Return the name of the found nav group -- */
         return ni_indexing[ ( next_item ) ];
-
     }
 
 }

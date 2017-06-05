@@ -29,6 +29,6 @@ export declare class NavGroup extends React.Component<NavGroupProps, undefined> 
     recursiveCloneChildren(children: any): React.SFCElement<{
         ref: number;
     }>[];
-    fetch_instruction(instruction?: string): any;
+    fetch_instruction(instruction?: string): string;
     render(): JSX.Element;
 }

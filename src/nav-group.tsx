@@ -128,7 +128,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
         }
 
         this._NgController.add_new_nav_group(
-            this.nav_group_name, this
+            this
         );
 
         for (let ref in this.refs) 
@@ -147,29 +147,26 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
 
     /*------------------------------------------------------
     */
-    recursiveCloneChildren( children : any ) {
-
+    recursiveCloneChildren( children : any ) 
+    {
         return React.Children.map(children, (child : any, idx ) => {
-
             return React.cloneElement(child, { ref: idx });
-
         })
     }
 
     /*------------------------------------------------------
     * checks to see if the instruction has been supplied though the navgroup attributes
     */
-    fetch_instruction( instruction : string = '' )
+    fetch_instruction( instruction : string = '' ) : string
     {
         let props : any = this.props;
 
         if( props.hasOwnProperty( instruction ) )
         {
-            return ( props[ instruction ] );
+            return String( props[ instruction ] );
         }
 
         return null;
-
     }
 
     /*------------------------------------------------------

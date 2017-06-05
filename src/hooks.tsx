@@ -17,6 +17,7 @@ export class _Hooks {
         'custom',
     ];
 
+
     /*------------------------------------------------------
     * @array
     * Place to store all custom method
