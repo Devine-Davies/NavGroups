@@ -7,10 +7,9 @@ export interface NavGroupProps {
     name?            : string;
 
     /* -- horizontal || vertical */
-    direction?       : string; 
+    direction?       : string;
 
-    /* -- When entering the group it to remember the last active item and use that 
-    -- */
+    /* -- When entering the group it to remember the last active item and use that -- */
     historyItem?     : boolean;
 
     /* -- When decleard on a group attr, the group will add the class of the item name to it's self -- */
@@ -19,7 +18,7 @@ export interface NavGroupProps {
     /* -- class name to use when active -- */
     activeClassName?    : string;
 
-    /* -- Here are our events for the navGroups-- */
+    /* -- Here are our Actions for the navGroups-- */
     onEnter?       : string;
     onBack?        : string;
     onUp?          : string;
@@ -56,11 +55,11 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     /*------------------------------------------------------
     * Some class functions
     */
-    toggle_active() 
-    { 
+    toggle_active()
+    {
         if( this.nav_group )
         {
-            this.nav_group.classList.toggle( this.get_active_class_name() ); 
+            this.nav_group.classList.toggle( this.get_active_class_name() );
         }
     }
 
@@ -69,16 +68,16 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     */
     make_active()
     {
-        this.nav_group.classList.add( this.get_active_class_name() ); 
+        this.nav_group.classList.add( this.get_active_class_name() );
     }
 
     /*------------------------------------------------------
     * Active item indicator
     * @active_navitem_name - the name of the navitem you wish to use
-    * @action - add || remove 
+    * @action - add || remove
     */
-    active_item_indicator( 
-        active_navitem_name : string  = null, 
+    active_item_indicator(
+        active_navitem_name : string  = null,
         action              : string  = 'add'
     )
     {
@@ -89,15 +88,15 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
         {
             if( action == 'remove' )
             {
-                this.nav_group.classList.remove( 
+                this.nav_group.classList.remove(
                     active_navitem_name
                 );
             }
             else
             {
-                this.nav_group.classList.add( 
-                    active_navitem_name 
-                ); 
+                this.nav_group.classList.add(
+                    active_navitem_name
+                );
             }
         }
     }
@@ -105,7 +104,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     /*------------------------------------------------------
     * Gens a random name for this navgroup
     */
-    gen_random_name() 
+    gen_random_name()
     {
         let random_name : string = '';
 
@@ -117,7 +116,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     }
 
     /*------------------------------------------------------
-    * this it where we append this object and all of its navitems 
+    * this it where we append this object and all of its navitems
     */
     componentDidMount()
     {
@@ -131,7 +130,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
             this
         );
 
-        for (let ref in this.refs) 
+        for (let ref in this.refs)
         {
             let item : any = this.refs[ ref ];
 
@@ -147,7 +146,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
 
     /*------------------------------------------------------
     */
-    recursiveCloneChildren( children : any ) 
+    recursiveCloneChildren( children : any )
     {
         return React.Children.map(children, (child : any, idx ) => {
             return React.cloneElement(child, { ref: idx });

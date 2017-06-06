@@ -1,5 +1,3 @@
-import { Hooks } from "./hooks";
-
 declare var document : any;
 
 export class _NgController {
@@ -12,7 +10,7 @@ export class _NgController {
 
     /*------------------------------------------------------
     * @object
-    * Our main object for all our item 
+    * Our main object for all our item
     */
     nav_groups : any = {};
 
@@ -21,7 +19,7 @@ export class _NgController {
     * our current navNavgroup
     */
     active_navgroup : any = null;
-    
+
     /*------------------------------------------------------
     * @HtmlElement
     * our current navItem
@@ -70,7 +68,7 @@ export class _NgController {
     * @Default actions
     * If no actions are provided use these
     */
-    default_actions : any = { 
+    default_actions : any = {
         'vertical' : {
             'onUp'    : 'ni:prev',
             'onRight' : 'ng:next',
@@ -116,7 +114,7 @@ export class _NgController {
 
     /*-----------------------------------------------------
     * @function - Append new nav item
-    * @info - Adds a new navitem to an exsisting navgroup 
+    * @info - Adds a new navitem to an exsisting navgroup
     * @conditions set - Only if Navitems found
     * -----------------------------------------------------
     * [attr] = startingPoint? : boolean; - is the main starting point of the app;
@@ -128,9 +126,9 @@ export class _NgController {
         let nav_item_name  : string = nav_item.get_name();
 
         /* -- Set this item as an gen entry point for the group is  -- */
-        if( nav_item.is_entry_point() ) 
+        if( nav_item.is_entry_point() )
         {
-            this.nav_groups[ nav_group_name ]['item_entry_point'] = nav_item_name; 
+            this.nav_groups[ nav_group_name ]['item_entry_point'] = nav_item_name;
         }
 
         /* -- Add into the right group -- */
@@ -189,7 +187,7 @@ export class _NgController {
 
         /* -- if not use nav group -- */
         instruction = ( instruction == null )? this.active_navgroup.obj.fetch_instruction( event ) : instruction
-        
+
         /* -- if still no instruction, lets make some use some default_actions -- */
         if( instruction == null )
         {
@@ -238,7 +236,7 @@ export class _NgController {
         if( instruction.includes( '|' ) && instruction.startsWith("ng:") )
         {
             let instructions : any = instruction.split("|");
-            
+
             for( let instruction of instructions )
             {
                 this.analyse_instruction( instruction );
@@ -278,12 +276,12 @@ export class _NgController {
         /* -- Let's invoke a hook -- */
         else if( instruction.indexOf( hook_prefix ) > -1 )
         {
-            Hooks.call( instruction, {
-                'active_navgroup' : this.active_navgroup,
-                'active_navitem'  : this.active_navitem
-            } );
+            // Hooks.call( instruction, {
+            //     'active_navgroup' : this.active_navgroup,
+            //     'active_navitem'  : this.active_navitem
+            // } );
         }
-        
+
         /* -- Not a vallid instruction -- */
         else {
             console.log('Not a vallid instruction');
@@ -346,13 +344,13 @@ export class _NgController {
                 next_navgroup_name = instruction;
             }
         }
-    
+
         if( this.nav_groups.hasOwnProperty( next_navgroup_name ) )
         {
             if( this.active_navgroup )
             {
                 this.active_navgroup.obj.toggle_active();
-    
+
                 /* -- Remove the active item name of the group class -- */
                 this.active_navgroup.obj.active_item_indicator(
                     this.active_navitem.get_name(), 'remove'
@@ -390,13 +388,13 @@ export class _NgController {
             'prev'   : this.get_next_nav_item( active_group['selected_nav_item'], 'prev' ),
             'first'  : active_group['nav_items_index'][ 0 ],
             'last'   : active_group['nav_items_index'][ active_group['nav_items_index'].length - 1 ],
-            
+
             /* -- Spechial movments -- */
             "move_by_name"     : this.get_item_in_group( instruction ),
             'last_selected'    : active_group['selected_nav_item'],
             'item_entry_point' : active_group['item_entry_point']
         }
-        
+
         /* -- Move to item of a given name -- */
         if( possible_moves[ "move_by_name" ] != false )
         {
@@ -433,7 +431,7 @@ export class _NgController {
         }
 
         /* -- Turn off the current item | if one has been set-- */
-        if( this.active_navitem ) 
+        if( this.active_navitem )
         {
             this.active_navitem.toggle_active();
 
@@ -464,7 +462,7 @@ export class _NgController {
     * Get item in group
     * @item_name - the name of the navitem you wish to use
     */
-    private get_item_in_group( item_name : string = null ) : boolean 
+    private get_item_in_group( item_name : string = null ) : boolean
     {
         let active_group : any = this.active_navgroup;
 
@@ -491,7 +489,7 @@ export class _NgController {
         let next_nav    : number   = at_pos;
 
         /* -- Update depending on direction -- */
-        next_nav = ( dir == 'next' )? next_nav += 1 : next_nav -= 1; 
+        next_nav = ( dir == 'next' )? next_nav += 1 : next_nav -= 1;
 
         /* -- Nav constraints -- */
         var constraint = {
@@ -526,7 +524,7 @@ export class _NgController {
         let next_item   : number   = at_pos;
 
         /* -- Update depending on direction -- */
-        next_item = ( direction == 'next' )? next_item += 1 : next_item -= 1; 
+        next_item = ( direction == 'next' )? next_item += 1 : next_item -= 1;
 
         /* -- Constraints to check -- */
         var constraint = {
@@ -534,15 +532,15 @@ export class _NgController {
             over  : ( next_item == ni_indexing.length ),
         }
 
-        if( constraint.under ) 
-        { 
+        if( constraint.under )
+        {
             /* -- Move to last nav group -- */
-            next_item = ni_indexing.length - 1; 
+            next_item = ni_indexing.length - 1;
         }
-        else if ( constraint.over ) 
+        else if ( constraint.over )
         {
             /* -- Move to first nav group  -- */
-            next_item = 0; 
+            next_item = 0;
         }
 
         /* -- Return the name of the found nav group -- */
