@@ -65,7 +65,7 @@ const App = () => (
 
                 <NavItem onLeft="ng:menu"  >Item</NavItem>
 
-                <NavItem onEnter="ng:4|ni:5" >Item</NavItem>
+                <NavItem onEnter="ng:inner-group|ni:2" >Item</NavItem>
 
                 <NavItem startingPoint onRight="ni:last" >goto End</NavItem>
 

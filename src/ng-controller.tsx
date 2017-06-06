@@ -88,10 +88,10 @@ export class _NgController {
 
     /*------------------------------------------------------
     */
-    constructor(
-        _Hooks : any = Hooks
-    )
-    {  this.add_window_key_events();  }
+    constructor()
+    {
+        this.add_window_key_events();
+    }
 
     /*-----------------------------------------------------
     * @function - Add new nav group
@@ -199,7 +199,7 @@ export class _NgController {
 
         if( instruction != null )
         {
-            this.analyse_instructions(
+            this.analyse_instruction(
                 instruction
             );
         }
@@ -228,7 +228,7 @@ export class _NgController {
     |               |            |                                                                       |
     | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
     * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    private analyse_instructions( instruction : string = null )
+    private analyse_instruction( instruction : string = null )
     {
         let delimiter       : string  = ':';
         let navitem_prefix  : string  = 'ni'   + delimiter;
@@ -237,11 +237,12 @@ export class _NgController {
 
         if( instruction.includes( '|' ) && instruction.startsWith("ng:") )
         {
-            let split : any = instruction.split("|");
+            let instructions : any = instruction.split("|");
             
-            this.analyse_instructions( split[ 0 ] )
-
-            this.analyse_instructions( split[ 1 ] )
+            for( let instruction of instructions )
+            {
+                this.analyse_instruction( instruction );
+            }
         }
 
         /* -- Move to item -- */
@@ -277,20 +278,47 @@ export class _NgController {
         /* -- Let's invoke a hook -- */
         else if( instruction.indexOf( hook_prefix ) > -1 )
         {
-            let args = {
+            Hooks.call( instruction, {
                 'active_navgroup' : this.active_navgroup,
                 'active_navitem'  : this.active_navitem
-            }
-
-            Hooks.call( instruction, args );
-
+            } );
         }
+        
+        /* -- Not a vallid instruction -- */
+        else {
+            console.log('Not a vallid instruction');
+        }
+    }
 
+    /*------------------------------------------------------
+    * @function - Run instructions
+    * @info - A programatic way to call an instuction
+    * @instruction set - linked to analyse_instruction string
+    */
+    public run_instructions( instruction : string = null )
+    {
+        if( instruction )
+        {
+            this.analyse_instruction( instruction );
+        }
+    }
+
+    /*------------------------------------------------------
+    * ---------
+    */
+    public run_action( event : string = null )
+    {
+        if( event )
+        {
+            this.key_invoked(
+                event
+            );
+        }
     }
 
     /*------------------------------------------------------
     * Move to new nav group
-    * @instruction - based in the ng info on the table above ( analyse_instructions )
+    * @instruction - based in the ng info on the table above ( analyse_instruction )
     * @nav_item_name - the name of the item in the active_nav_group
     */
     private move_to_new_nav_group( instruction : string = null, nav_item_name : string = null )
@@ -344,7 +372,7 @@ export class _NgController {
 
     /*------------------------------------------------------
     * Move to new nav item
-    * @instruction - based in the ni info on the table above ( analyse_instructions )
+    * @instruction - based in the ni info on the table above ( analyse_instruction )
     */
     private move_to_new_nav_item( instruction : string = null )
     {
@@ -514,5 +542,6 @@ export class _NgController {
     }
 
 }
+
 
 export var NgController = new _NgController();

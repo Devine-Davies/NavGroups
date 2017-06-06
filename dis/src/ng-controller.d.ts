@@ -6,12 +6,14 @@ export declare class _NgController {
     history_stack: any;
     keys: any;
     default_actions: any;
-    constructor(_Hooks?: any);
+    constructor();
     add_new_nav_group(navgroup_obj?: any): void;
     append_new_nav_item(nav_group_name?: string, nav_item?: any): void;
     private add_window_key_events();
     private key_invoked(event?);
-    private analyse_instructions(instruction?);
+    private analyse_instruction(instruction?);
+    run_instructions(instruction?: string): void;
+    run_action(event?: string): void;
     private move_to_new_nav_group(instruction?, nav_item_name?);
     private move_to_new_nav_item(instruction?);
     private get_item_in_group(item_name?);

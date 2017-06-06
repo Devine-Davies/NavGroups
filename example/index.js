@@ -7041,8 +7041,7 @@ exports.Hooks = new _Hooks();
 Object.defineProperty(exports, "__esModule", { value: true });
 var hooks_1 = __webpack_require__(55);
 var _NgController = (function () {
-    function _NgController(_Hooks) {
-        if (_Hooks === void 0) { _Hooks = hooks_1.Hooks; }
+    function _NgController() {
         var _this = this;
         this.nav_groups_indexing = [];
         this.nav_groups = {};
@@ -7128,19 +7127,21 @@ var _NgController = (function () {
             instruction = default_actions[navgroup_direction][event];
         }
         if (instruction != null) {
-            this.analyse_instructions(instruction);
+            this.analyse_instruction(instruction);
         }
     };
-    _NgController.prototype.analyse_instructions = function (instruction) {
+    _NgController.prototype.analyse_instruction = function (instruction) {
         if (instruction === void 0) { instruction = null; }
         var delimiter = ':';
         var navitem_prefix = 'ni' + delimiter;
         var navgroup_prefix = 'ng' + delimiter;
         var hook_prefix = 'hook' + delimiter;
         if (instruction.includes('|') && instruction.startsWith("ng:")) {
-            var split = instruction.split("|");
-            this.analyse_instructions(split[0]);
-            this.analyse_instructions(split[1]);
+            var instructions = instruction.split("|");
+            for (var _i = 0, instructions_1 = instructions; _i < instructions_1.length; _i++) {
+                var instruction_1 = instructions_1[_i];
+                this.analyse_instruction(instruction_1);
+            }
         }
         else if (instruction.includes(navitem_prefix)) {
             instruction = instruction.replace(navitem_prefix, '');
@@ -7157,11 +7158,25 @@ var _NgController = (function () {
             this.move_to_new_nav_group(instruction);
         }
         else if (instruction.indexOf(hook_prefix) > -1) {
-            var args = {
+            hooks_1.Hooks.call(instruction, {
                 'active_navgroup': this.active_navgroup,
                 'active_navitem': this.active_navitem
-            };
-            hooks_1.Hooks.call(instruction, args);
+            });
+        }
+        else {
+            console.log('Not a vallid instruction');
+        }
+    };
+    _NgController.prototype.run_instructions = function (instruction) {
+        if (instruction === void 0) { instruction = null; }
+        if (instruction) {
+            this.analyse_instruction(instruction);
+        }
+    };
+    _NgController.prototype.run_action = function (event) {
+        if (event === void 0) { event = null; }
+        if (event) {
+            this.key_invoked(event);
         }
     };
     _NgController.prototype.move_to_new_nav_group = function (instruction, nav_item_name) {
@@ -10204,7 +10219,7 @@ var App = function () { return (React.createElement("div", { className: 'window'
                     React.createElement(index_1.NavItem, { onRight: "ng:section-2|ni:5" }, "Item")))),
         React.createElement(index_1.NavGroup, { name: "section-2" },
             React.createElement(index_1.NavItem, { onLeft: "ng:menu" }, "Item"),
-            React.createElement(index_1.NavItem, { onEnter: "ng:4|ni:5" }, "Item"),
+            React.createElement(index_1.NavItem, { onEnter: "ng:inner-group|ni:2" }, "Item"),
             React.createElement(index_1.NavItem, { startingPoint: true, onRight: "ni:last" }, "goto End"),
             React.createElement(index_1.NavItem, null, "Item"),
             React.createElement(index_1.NavItem, null, "Item"),
