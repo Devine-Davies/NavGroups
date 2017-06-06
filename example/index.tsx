@@ -33,7 +33,7 @@ const App = () => (
 
                     <p>Nested groups <br/> (enter to go inside) </p>
 
-                    <NavGroup name="inner-group"  onBack="ng:last|ni:5" > 
+                    <NavGroup name="inner-group" onBack="ng:last|ni:5" > 
 
                         <NavItem onLeft="ng:last|ni:1" >Item</NavItem>
 
@@ -53,7 +53,7 @@ const App = () => (
 
                         <NavItem >Item</NavItem>
 
-                        <NavItem  onRight="ng:section-2|ni:5" >Item</NavItem>
+                        <NavItem onRight="ng:section-2|ni:5" >Item</NavItem>
 
                     </NavGroup>
 
@@ -61,9 +61,9 @@ const App = () => (
 
             </NavGroup>
 
-            <NavGroup name="section-2"  >
+            <NavGroup name="section-2" indicateActiveItem  >
 
-                <NavItem onLeft="ng:menu"  >Item</NavItem>
+                <NavItem onLeft="ng:menu" >Item</NavItem>
 
                 <NavItem onEnter="ng:inner-group|ni:2" >Item</NavItem>
 

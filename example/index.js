@@ -7200,6 +7200,7 @@ var _NgController = (function () {
         if (this.nav_groups.hasOwnProperty(next_navgroup_name)) {
             if (this.active_navgroup) {
                 this.active_navgroup.obj.toggle_active();
+                this.active_navgroup.obj.active_item_indicator(this.active_navitem.get_name(), 'remove');
             }
             this.active_navgroup = this.nav_groups[next_navgroup_name];
             this.active_navgroup.obj.toggle_active();
@@ -7238,11 +7239,12 @@ var _NgController = (function () {
         }
         if (this.active_navitem) {
             this.active_navitem.toggle_active();
+            active_group.obj.active_item_indicator(this.active_navitem.get_name(), 'remove');
         }
         this.active_navitem = active_group['nav_items'][active_group['selected_nav_item']].obj;
         this.active_navitem.toggle_active();
+        active_group.obj.active_item_indicator(this.active_navitem.get_name());
         this.history_stack['navitems'].push(this.active_navitem.get_name());
-        active_group.obj.indicate_active_item(this.active_navitem.get_name(), this.active_navitem.was_given_name());
     };
     _NgController.prototype.get_item_in_group = function (item_name) {
         if (item_name === void 0) { item_name = null; }
@@ -10217,7 +10219,7 @@ var App = function () { return (React.createElement("div", { className: 'window'
                     React.createElement(index_1.NavItem, { onLeft: "ng:last|ni:5" }, "Item"),
                     React.createElement(index_1.NavItem, null, "Item"),
                     React.createElement(index_1.NavItem, { onRight: "ng:section-2|ni:5" }, "Item")))),
-        React.createElement(index_1.NavGroup, { name: "section-2" },
+        React.createElement(index_1.NavGroup, { name: "section-2", indicateActiveItem: true },
             React.createElement(index_1.NavItem, { onLeft: "ng:menu" }, "Item"),
             React.createElement(index_1.NavItem, { onEnter: "ng:inner-group|ni:2" }, "Item"),
             React.createElement(index_1.NavItem, { startingPoint: true, onRight: "ni:last" }, "goto End"),
@@ -10266,7 +10268,6 @@ var NavGroup = (function (_super) {
         var _this = _super.call(this) || this;
         _this.nav_group = null;
         _this.nav_group_name = null;
-        _this.last_active_navitem_name = null;
         _this._NgController = ng_controller_1.NgController;
         return _this;
     }
@@ -10282,15 +10283,17 @@ var NavGroup = (function (_super) {
     NavGroup.prototype.make_active = function () {
         this.nav_group.classList.add(this.get_active_class_name());
     };
-    NavGroup.prototype.indicate_active_item = function (active_navitem_name, item_was_given_name) {
+    NavGroup.prototype.active_item_indicator = function (active_navitem_name, action) {
         if (active_navitem_name === void 0) { active_navitem_name = null; }
-        if (item_was_given_name === void 0) { item_was_given_name = false; }
+        if (action === void 0) { action = 'add'; }
+        if (!this.props.indicateActiveItem) {
+            return true;
+        }
         if (active_navitem_name) {
-            if (this.last_active_navitem_name) {
-                this.nav_group.classList.remove(this.last_active_navitem_name);
+            if (action == 'remove') {
+                this.nav_group.classList.remove(active_navitem_name);
             }
-            if (item_was_given_name) {
-                this.last_active_navitem_name = active_navitem_name;
+            else {
                 this.nav_group.classList.add(active_navitem_name);
             }
         }

@@ -13,9 +13,8 @@ export interface NavGroupProps {
     -- */
     historyItem?     : boolean;
 
-    /* -- When added to the group the group will add the call of the item it's self, 
-    -- if the item has been given a nam  -- */
-    // indicateActiveItem? : boolean;
+    /* -- When decleard on a group attr, the group will add the class of the item name to it's self -- */
+    indicateActiveItem? : boolean;
 
     /* -- class name to use when active -- */
     activeClassName?    : string;
@@ -35,11 +34,9 @@ export interface NavGroupProps {
 export class NavGroup extends React.Component<NavGroupProps, undefined> {
 
     private _NgController: any;
-    
+
     nav_group      : any = null;
     nav_group_name : string = null;
-
-    last_active_navitem_name : string = null;
 
     public constructor() {
         super();
@@ -76,29 +73,32 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     }
 
     /*------------------------------------------------------
-    * Some class functions
+    * Active item indicator
+    * @active_navitem_name - the name of the navitem you wish to use
+    * @action - add || remove 
     */
-    indicate_active_item( active_navitem_name : string = null, item_was_given_name : boolean = false )
+    active_item_indicator( 
+        active_navitem_name : string  = null, 
+        action              : string  = 'add'
+    )
     {
         /* -- Make this an setting on the node -- */
-        // if( ! this.props.indicateActiveItem ) { return true; }
+        if( ! this.props.indicateActiveItem ) { return true; }
 
         if( active_navitem_name )
         {
-            if( this.last_active_navitem_name )
+            if( action == 'remove' )
             {
                 this.nav_group.classList.remove( 
-                    this.last_active_navitem_name
+                    active_navitem_name
                 );
             }
-
-            /* -- Only add the name of the item if it has been given a name --  */
-            if( item_was_given_name )
+            else
             {
-                this.last_active_navitem_name = active_navitem_name;
-                this.nav_group.classList.add( active_navitem_name ); 
+                this.nav_group.classList.add( 
+                    active_navitem_name 
+                ); 
             }
-
         }
     }
 

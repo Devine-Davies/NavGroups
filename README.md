@@ -27,13 +27,14 @@ import { NgController, NavGroup, NavItem } from "navgroups";
 ```
     
 **Setting Props for NavGroup && NavItem**
-| Setting props     | Avalable   | Description                                                           |
-|------------------ |------------|-----------------------------------------------------------------------|
-| name              | NG & NI    | The name you wish to give the navitem/navgroup. If none given a random one will be generated. |
-| direction         | NG         | Can except "horizontal" or "vertical" the key binding will the change depending on the direction specified |
-| startingPoint     | NI         | Is the main item that will be select when first entering the group. |
-| entryPoint        | NI         | On new selected navgroup, if this has been set to turn on a navitem inside that group then this will be the first active one every time. |
-| activeClassName   | NG & NI    | Active class name given to an active navgroup/navitem |
+| Setting props      | Avalable   | Description                                                           |
+|------------------  |------------|-----------------------------------------------------------------------|
+| name               | NG & NI    | The name you wish to give the navitem/navgroup. If none given a random one will be generated. |
+| direction          | NG         | Can except "horizontal" or "vertical" the key binding will the change depending on the direction specified |
+| indicateActiveItem | NG         | When decleard on a group attr, the group will add the class of the item name to it's self |
+| startingPoint      | NI         | Is the main item that will be select when first entering the group. |
+| entryPoint         | NI         | On new selected navgroup, if this has been set to turn on a navitem inside that group then this will be the first active one every time. |
+| activeClassName    | NG & NI    | Active class name given to an active navgroup/navitem |
 
 ## Action Props & Instructions
 Action props define what type of interaction you want the navgroup/navitem. Every action will then need an instruction to carry out. 

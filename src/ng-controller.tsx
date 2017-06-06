@@ -352,6 +352,11 @@ export class _NgController {
             if( this.active_navgroup )
             {
                 this.active_navgroup.obj.toggle_active();
+    
+                /* -- Remove the active item name of the group class -- */
+                this.active_navgroup.obj.active_item_indicator(
+                    this.active_navitem.get_name(), 'remove'
+                );
             }
 
             this.active_navgroup = this.nav_groups[ next_navgroup_name ];
@@ -431,6 +436,11 @@ export class _NgController {
         if( this.active_navitem ) 
         {
             this.active_navitem.toggle_active();
+
+            /* -- Remove the active item name of the group class -- */
+            active_group.obj.active_item_indicator(
+                this.active_navitem.get_name(), 'remove'
+            );
         }
 
         /* -- Update the navitem object -- */
@@ -439,17 +449,15 @@ export class _NgController {
         /* -- AddMake the last active item unacitve -- */
         this.active_navitem.toggle_active();
 
-        /* -- Add to the history stack -- */
-        this.history_stack['navitems'].push(
+        /* -- Add the active item name of the group class -- */
+        active_group.obj.active_item_indicator(
             this.active_navitem.get_name()
         );
 
         /* -- Add to the history stack -- */
-        active_group.obj.indicate_active_item(
-            this.active_navitem.get_name(),
-            this.active_navitem.was_given_name()
+        this.history_stack['navitems'].push(
+            this.active_navitem.get_name()
         );
-
     }
 
     /*------------------------------------------------------
