@@ -1,6 +1,7 @@
 declare var document : any;
+import { NgHooks } from "./ng-hooks";
 
-export class _NgController {
+export class _NgController extends NgHooks {
 
     /*------------------------------------------------------
     * @array
@@ -88,7 +89,7 @@ export class _NgController {
     */
     constructor()
     {
-        alert('here');
+        super();
         this.add_window_key_events();
     }
 
@@ -277,10 +278,10 @@ export class _NgController {
         /* -- Let's invoke a hook -- */
         else if( instruction.indexOf( hook_prefix ) > -1 )
         {
-            // Hooks.call( instruction, {
-            //     'active_navgroup' : this.active_navgroup,
-            //     'active_navitem'  : this.active_navitem
-            // } );
+            super.call( instruction, {
+                'active_navgroup' : this.active_navgroup,
+                'active_navitem'  : this.active_navitem
+            } );
         }
 
     }
@@ -545,6 +546,5 @@ export class _NgController {
     }
 
 }
-
 
 export var NgController = new _NgController();

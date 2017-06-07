@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NavGroup, NavItem } from "../index";
+import { NgController, NavGroup, NavItem } from "../index";
 
 const App = () => (
 
@@ -80,7 +80,7 @@ const App = () => (
 
                 <NavItem onLeft="ng:menu" >Item</NavItem>
 
-                <NavItem entryPoint >Entry item</NavItem>
+                <NavItem entryPoint onBack='hook:install-game' >Entry item</NavItem>
 
                 <NavItem >Item</NavItem>
 
@@ -112,5 +112,16 @@ const App = () => (
 
     </div>
 );
+
+window.onload = function(e){ 
+
+    NgController.set( {
+        'hook_name' : 'hook:install-game',
+        'method'    : ( args : any ) => { 
+            console.log( args );
+        }
+    });
+
+}
 
 ReactDOM.render(<App />, document.getElementById("example") );

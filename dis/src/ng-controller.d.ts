@@ -1,4 +1,5 @@
-export declare class _NgController {
+import { NgHooks } from "./ng-hooks";
+export declare class _NgController extends NgHooks {
     nav_groups_indexing: string[];
     nav_groups: any;
     active_navgroup: any;

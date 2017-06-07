@@ -1,4 +1,4 @@
-export declare class _NgHooks {
+export declare class NgHooks {
     hook_sets: string[];
     hooks: any;
     constructor();
@@ -7,4 +7,3 @@ export declare class _NgHooks {
     private get_hook_set_from_name(hook_name?);
     private initiate_hook(hook_set?, hook_name?, hook_info?);
 }
-export declare var NgHooks: _NgHooks;
