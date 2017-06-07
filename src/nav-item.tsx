@@ -9,8 +9,7 @@ export interface NavItemProps {
     /* -- Starting point -- */
     startingPoint? : boolean;
 
-    /* -- When entering the group use this item
-    -- takes priority over historyItem  -- */
+    /* -- Use this navitem as the first selected item wehn entering a navgroup, takes priority over historyItem -- */
     entryPoint?    : boolean;
 
     /* -- class name to use when active -- */
@@ -22,7 +21,7 @@ export interface NavItemProps {
     onUp?          : string;
     onRight?       : string;
     onDown?        : string;
-    onLeft?        : string; 
+    onLeft?        : string;
 
     // onExit?       : any;
     // onEntrance?   : any;
@@ -48,7 +47,7 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     was_given_name()        : boolean { return ( this.props.name ) ? true : false       }
 
     /*------------------------------------------------------
-    * this it where we append this object and all of its navitems 
+    * this it where we append this object and all of its navitems
     */
     componentDidMount()
     {
@@ -60,11 +59,11 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     /*------------------------------------------------------
     * Some class functions
     */
-    toggle_active() 
-    { 
+    toggle_active()
+    {
         if( this.navitem )
         {
-            this.navitem.classList.toggle( this.get_active_class_name() ); 
+            this.navitem.classList.toggle( this.get_active_class_name() );
         }
     }
 
@@ -72,16 +71,16 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     * ------
     */
     make_active()
-    {    
-        this.navitem.classList.add( this.get_active_class_name() ); 
+    {
+        this.navitem.classList.add( this.get_active_class_name() );
     }
 
     /*------------------------------------------------------
     * ------
     */
-    remove_active() 
-    { 
-        this.navitem.classList.remove( this.get_active_class_name() ); 
+    remove_active()
+    {
+        this.navitem.classList.remove( this.get_active_class_name() );
     }
 
     /*------------------------------------------------------
@@ -102,7 +101,7 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     /*------------------------------------------------------
     * Gens a random name for this navgitem
     */
-    gen_random_name() 
+    gen_random_name()
     {
         let random_name : string = '';
 
@@ -131,13 +130,13 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
 
     /*------------------------------------------------------
     */
-    recursiveCloneChildren( children : any ) 
+    recursiveCloneChildren( children : any )
     {
         return React.Children.map(children, (child : any) => {
 
             var childProps : any = {};
 
-            if ( child.props ) 
+            if ( child.props )
             {
                 childProps.children = this.recursiveCloneChildren( child.props.children );
                 return React.cloneElement(child, childProps);

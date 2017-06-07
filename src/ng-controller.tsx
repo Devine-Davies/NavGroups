@@ -282,10 +282,6 @@ export class _NgController {
             // } );
         }
 
-        /* -- Not a vallid instruction -- */
-        else {
-            console.log('Not a vallid instruction');
-        }
     }
 
     /*------------------------------------------------------

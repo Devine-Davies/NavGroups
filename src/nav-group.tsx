@@ -9,7 +9,7 @@ export interface NavGroupProps {
     /* -- horizontal || vertical */
     direction?       : string;
 
-    /* -- When entering the group it to remember the last active item and use that -- */
+    /* -- Tells the navgroup to remember to remember the last selected navitem and use that as the first selected navitem when entering.-- */
     historyItem?     : boolean;
 
     /* -- When decleard on a group attr, the group will add the class of the item name to it's self -- */
