@@ -40,6 +40,7 @@ ReactDOM.render(<App />, document.getElementById("example") );
 ```
 
 **Setting Props for NavGroup && NavItem**
+
 | Setting props      | Avalable   | Type       |  Description                                                           |
 |------------------  |------------|------------|-----------------------------------------------------------------|
 | name               | NG & NI    | String     | The name you wish to give the navitem/navgroup. If none given a random one will be generated. |
@@ -71,6 +72,7 @@ Action props define what type of interaction you want the navgroup/navitem and e
 | onLeft            | NG & NI  | Triggerd when the left aorrow key(◄) or **A**  is invoked             |
 
 **Default actions** are applied and change occordadly depending on the direction of navgroup.
+
 | Action prop       | Vertical | Horizontal |
 |------------------ |----------|------------|
 | onUp              | ni:prev  | ng:prev    |
@@ -82,6 +84,7 @@ Action props define what type of interaction you want the navgroup/navitem and e
 Instructions contain infromation on how the navgroup/navitem should respond when an action has been invoked.
 
 **Navgroup instructions**
+
 | Instructions  | is default | Description                                                           |
 |---------------|------------|-----------------------------------------------------------------------|
 | ng:next       | default    | next navgroup                                                         |
@@ -92,6 +95,7 @@ Instructions contain infromation on how the navgroup/navitem should respond when
 | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
 
 **Navitem instructions**
+
 | Instructions  | is default | Description                                                           |
 |---------------|------------|-----------------------------------------------------------------------|
 | ni:next       | default    | next navitem                                                          |
