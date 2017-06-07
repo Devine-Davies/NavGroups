@@ -88,6 +88,7 @@ export class _NgController {
     */
     constructor()
     {
+        alert('here');
         this.add_window_key_events();
     }
 

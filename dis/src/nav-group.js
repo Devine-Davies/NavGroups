@@ -18,7 +18,6 @@ var NavGroup = (function (_super) {
         var _this = _super.call(this) || this;
         _this.nav_group = null;
         _this.nav_group_name = null;
-        _this.last_active_navitem_name = null;
         _this._NgController = ng_controller_1.NgController;
         return _this;
     }
@@ -34,15 +33,17 @@ var NavGroup = (function (_super) {
     NavGroup.prototype.make_active = function () {
         this.nav_group.classList.add(this.get_active_class_name());
     };
-    NavGroup.prototype.indicate_active_item = function (active_navitem_name, item_was_given_name) {
+    NavGroup.prototype.active_item_indicator = function (active_navitem_name, action) {
         if (active_navitem_name === void 0) { active_navitem_name = null; }
-        if (item_was_given_name === void 0) { item_was_given_name = false; }
+        if (action === void 0) { action = 'add'; }
+        if (!this.props.indicateActiveItem) {
+            return true;
+        }
         if (active_navitem_name) {
-            if (this.last_active_navitem_name) {
-                this.nav_group.classList.remove(this.last_active_navitem_name);
+            if (action == 'remove') {
+                this.nav_group.classList.remove(active_navitem_name);
             }
-            if (item_was_given_name) {
-                this.last_active_navitem_name = active_navitem_name;
+            else {
                 this.nav_group.classList.add(active_navitem_name);
             }
         }
@@ -58,7 +59,7 @@ var NavGroup = (function (_super) {
         if (this.props.name) {
             this.nav_group.classList.add(this.nav_group_name);
         }
-        this._NgController.add_new_nav_group(this.nav_group_name, this);
+        this._NgController.add_new_nav_group(this);
         for (var ref in this.refs) {
             var item = this.refs[ref];
             if (item.constructor.name == 'NavItem') {
@@ -75,7 +76,7 @@ var NavGroup = (function (_super) {
         if (instruction === void 0) { instruction = ''; }
         var props = this.props;
         if (props.hasOwnProperty(instruction)) {
-            return (props[instruction]);
+            return String(props[instruction]);
         }
         return null;
     };
