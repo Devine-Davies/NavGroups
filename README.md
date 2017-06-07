@@ -1,23 +1,31 @@
 # NavGroups
-A react library for mapping web layout's that can be controlled via a keyboard.
+NavGroup is a flexible and powerful react component for creating ui navigation base around big screen TV's. It allows you to quickly map out a web layout that can be controlled via a keyboard, similar to the type of experience you might find on TV's.
 
 ##### Built With
-- [React](https://facebook.github.io/react/) - A JavaScript library for building user interfaces
-* [TypeScript](https://www.typescriptlang.org/) - JavaScript that scales.
+_[React](https://facebook.github.io/react/):_ A JavaScript library for building user interfaces
 
-##### Setup
-A step by step series of examples to get a development env running
- - Install all dependencies ``` npm install ```
- - Run Development environment ``` npm run dev ```
+_[TypeScript](https://www.typescriptlang.org/):_ JavaScript that scales.
+
+## Setup
+The easiest way to use NavGroups is to install it from NPM and include it in your own React build process using webpack.
+
+```$ npm install -save NavGroups```
+
+#### Development
+ ``` bash
+ $ npm run dev - Deployment environment
+ $ npm run start - Deployment environment
+ $ npm run prepublish - Deployment environment
+ ```
 
 ## HTML Markup & Props
 Below illustrates the type of markup used to construct the navgroups react componant. The exsample is given in the from of [TSX](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
 
-###### ***index.tsx***
+___index.tsx___
 ```javascript
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NgController, NavGroup, NavItem } from "navgroups";
+import { NgController, NavGroup, NavItem } from "nav-groups";
 
 const App = () => (
     <div className='window' >
@@ -40,7 +48,6 @@ ReactDOM.render(<App />, document.getElementById("example") );
 ```
 
 **Setting Props for NavGroup && NavItem**
-
 | Setting props      | Avalable   | Type       |  Description                                                           |
 |------------------  |------------|------------|-----------------------------------------------------------------|
 | name               | NG & NI    | String     | The name you wish to give the navitem/navgroup. If none given a random one will be generated. |
@@ -95,7 +102,6 @@ Instructions contain infromation on how the navgroup/navitem should respond when
 | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
 
 **Navitem instructions**
-
 | Instructions  | is default | Description                                                           |
 |---------------|------------|-----------------------------------------------------------------------|
 | ni:next       | default    | next navitem                                                          |
@@ -118,11 +124,8 @@ import { NgController, NavGroup, NavItem } from "navgroups";
 NgController.run_instructions( 'ng:menu|ni:profile' )
 ```
 
-## Deployment
-Add additional notes about how to deploy this on a live system
-
 ## Authors
-* **Rhys Devine-Davies** - *Profile* - [Profile](http://www.mrdevinedavies.co.uk)
+**Rhys Devine-Davies** - [Profile](http://www.mrdevinedavies.co.uk)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
