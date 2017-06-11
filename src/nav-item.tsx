@@ -51,7 +51,8 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     */
     componentDidMount()
     {
-        if ( this.props.name ) {
+        if ( this.props.name )
+        {
             this.navitem.classList.add( this.props.name );
         }
     }
@@ -85,7 +86,7 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
 
     /*------------------------------------------------------
     * Get name
-    * returns the NavGroups name from the attribute
+    * returns the NavItem name from the attribute
     * if no attribute has been given, a random name is generated and that is returned
     -- */
     get_name()
@@ -125,7 +126,6 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
         }
 
         return null;
-
     }
 
     /*------------------------------------------------------

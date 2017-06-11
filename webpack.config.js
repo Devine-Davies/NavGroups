@@ -1,9 +1,8 @@
 module.exports = {
     entry: "./example/index.tsx",
     output: {
-        path: __dirname + '/example/',
-        filename: 'index.js',
-        // publicPath: __dirname + '/example'
+        path     : __dirname + '/example/',
+        filename : 'index.js',
     },
     devtool: "source-map",
     resolve: {

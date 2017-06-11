@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var _Hooks = (function () {
-    function _Hooks() {
-        this._GatewayClient = null;
+var NgHooks = (function () {
+    function NgHooks() {
         this.hook_sets = [
             'custom',
         ];
@@ -10,7 +9,7 @@ var _Hooks = (function () {
             'custom': {},
         };
     }
-    _Hooks.prototype.set = function (hook_info) {
+    NgHooks.prototype.set = function (hook_info) {
         if (hook_info === void 0) { hook_info = null; }
         if (typeof hook_info === 'object') {
             if (hook_info.hasOwnProperty('hook_name') && hook_info.hasOwnProperty('method')) {
@@ -21,7 +20,7 @@ var _Hooks = (function () {
             }
         }
     };
-    _Hooks.prototype.call = function (hook_name, args) {
+    NgHooks.prototype.call = function (hook_name, args) {
         if (hook_name === void 0) { hook_name = null; }
         if (args === void 0) { args = null; }
         if (hook_name) {
@@ -36,7 +35,7 @@ var _Hooks = (function () {
             }
         }
     };
-    _Hooks.prototype.get_hook_set_from_name = function (hook_name) {
+    NgHooks.prototype.get_hook_set_from_name = function (hook_name) {
         if (hook_name === void 0) { hook_name = null; }
         var hook_set = this.hook_sets[0];
         var potential_sets = {
@@ -56,7 +55,7 @@ var _Hooks = (function () {
             name: hook_name.replace(hook_set + ':', '')
         };
     };
-    _Hooks.prototype.initiate_hook = function (hook_set, hook_name, hook_info) {
+    NgHooks.prototype.initiate_hook = function (hook_set, hook_name, hook_info) {
         if (hook_set === void 0) { hook_set = null; }
         if (hook_name === void 0) { hook_name = null; }
         if (hook_info === void 0) { hook_info = null; }
@@ -65,11 +64,7 @@ var _Hooks = (function () {
             'method': hook_info.method
         };
     };
-    _Hooks.prototype.invoke_client_hook = function (hook_name) {
-        if (hook_name === void 0) { hook_name = null; }
-    };
-    return _Hooks;
+    return NgHooks;
 }());
-exports._Hooks = _Hooks;
-exports.Hooks = new _Hooks();
-//# sourceMappingURL=hooks.js.map
+exports.NgHooks = NgHooks;
+//# sourceMappingURL=ng-hooks.js.map

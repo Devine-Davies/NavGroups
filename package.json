@@ -2,15 +2,15 @@
   "name": "Navgroups",
   "version": "1.0.6",
   "description": "",
+  "author": "Rhys Devine-Davies <rhysdevine@gmail.com> (https://mrdevinedavies.co.uk)",
   "main": "dis/index.js",
   "typings": "index",
   "scripts": {
     "dev": "webpack -w",
     "start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.tsx",
-    "prepublish": "tsc && autodts generate"
+    "prepublish": " rm -r ./dis && tsc && autodts generate"
   },
-  "author": "Rhys Devine-Davies <rhysdevine@gmail.com> (https://mrdevinedavies.co.uk)",
   "license": "ISC",
   "dependencies": {
     "autodts": "0.0.6",

@@ -48,6 +48,7 @@ ReactDOM.render(<App />, document.getElementById("example") );
 ```
 
 **Setting Props for NavGroup && NavItem**
+
 | Setting props      | Avalable   | Type       |  Description                                                           |
 |------------------  |------------|------------|-----------------------------------------------------------------|
 | name               | NG & NI    | String     | The name you wish to give the navitem/navgroup. If none given a random one will be generated. |
