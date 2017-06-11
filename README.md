@@ -7,14 +7,24 @@ _[React](https://facebook.github.io/react/):_ A JavaScript library for building 
 _[TypeScript](https://www.typescriptlang.org/):_ JavaScript that scales.
 
 ## Setup
-The easiest way to use NavGroups is to install it from NPM and include it in your own React build process using webpack.
+For production use install NavGroups using NPM and include it in your own React build process using webpack.
 
-```$ npm install -save NavGroups```
+``` bash $ npm install -save NavGroups```
+
+``` javascript
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { NgController, NavGroup, NavItem } from "nav-groups";
+```
 
 #### Development
+
  ``` bash
- $ npm run dev - Deployment environment
- $ npm run start - Deployment environment
+ $ git clone https://github.com/Devine-Davies/NavGroups.git
+ $ cd NavGroups
+ $ npm install
+ $ npm run dev        - Deployment environment
+ $ npm run start      - Deployment environment
  $ npm run prepublish - Deployment environment
  ```
 
@@ -103,6 +113,7 @@ Instructions contain infromation on how the navgroup/navitem should respond when
 | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
 
 **Navitem instructions**
+
 | Instructions  | is default | Description                                                           |
 |---------------|------------|-----------------------------------------------------------------------|
 | ni:next       | default    | next navitem                                                          |
@@ -112,7 +123,7 @@ Instructions contain infromation on how the navgroup/navitem should respond when
 | ni:{{#}}      |            | Go to the given index of an item                                      |
 | ni:{{name}}   |            | Go to the item with that name                                         |
 
-> It's important to note that `navitem's` take priority over `navgroup's` instructions.
+> It's important to note that `NavItem's` take priority over `NavGroup's` instructions.
 
 > Instructions can be concatenated together by using the pipe operator  (```| ```)
 For example ```ng:{{#}}|ni:{{#}} ```
