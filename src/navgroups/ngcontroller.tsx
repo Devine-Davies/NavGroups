@@ -1,7 +1,7 @@
 declare var document : any;
-import { NgHooks } from "./ng-hooks";
+import { Hooks } from './../hooks';
 
-export class _NgController extends NgHooks {
+export class _NgController extends Hooks {
 
     /*------------------------------------------------------
     * @array

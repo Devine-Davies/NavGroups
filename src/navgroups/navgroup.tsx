@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { NgController } from "./ng-controller";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { NgController } from './ngcontroller';
 
 export interface NavGroupProps {
     /* -- Name the group -- */
@@ -12,7 +12,7 @@ export interface NavGroupProps {
     /* -- Tells the navgroup to remember to remember the last selected navitem and use that as the first selected navitem when entering.-- */
     historyItem?     : boolean;
 
-    /* -- When decleard on a group attr, the group will add the class of the item name to it's self -- */
+    /* -- When declared on a group attr, the group will add the class of the item name to it's self -- */
     indicateActiveItem? : boolean;
 
     /* -- class name to use when active -- */

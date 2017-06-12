@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var ng_hooks_1 = require("./ng-hooks");
+var hooks_1 = require("./../hooks");
 var _NgController = (function (_super) {
     __extends(_NgController, _super);
     function _NgController() {
@@ -259,7 +259,7 @@ var _NgController = (function (_super) {
         return ni_indexing[(next_item)];
     };
     return _NgController;
-}(ng_hooks_1.NgHooks));
+}(hooks_1.Hooks));
 exports._NgController = _NgController;
 exports.NgController = new _NgController();
-//# sourceMappingURL=ng-controller.js.map
+//# sourceMappingURL=ngcontroller.js.map

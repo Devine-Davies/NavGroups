@@ -1,4 +1,4 @@
-import { NgController } from "./src/ng-controller";
-import { NavItem } from "./src/nav-item";
-import { NavGroup } from "./src/nav-group";
+import { NgController } from "./navgroups/ngcontroller";
+import { NavItem } from "./navgroups/navitem";
+import { NavGroup } from "./navgroups/navgroup";
 export { NgController, NavItem, NavGroup };

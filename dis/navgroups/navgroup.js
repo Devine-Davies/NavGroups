@@ -11,14 +11,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var ng_controller_1 = require("./ng-controller");
+var ngcontroller_1 = require("./ngcontroller");
 var NavGroup = (function (_super) {
     __extends(NavGroup, _super);
     function NavGroup() {
         var _this = _super.call(this) || this;
         _this.nav_group = null;
         _this.nav_group_name = null;
-        _this._NgController = ng_controller_1.NgController;
+        _this._NgController = ngcontroller_1.NgController;
         return _this;
     }
     NavGroup.prototype.get_name = function () { return this.nav_group_name; };
@@ -90,4 +90,4 @@ var NavGroup = (function (_super) {
     return NavGroup;
 }(React.Component));
 exports.NavGroup = NavGroup;
-//# sourceMappingURL=nav-group.js.map
+//# sourceMappingURL=navgroup.js.map

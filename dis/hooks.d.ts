@@ -1,4 +1,4 @@
-export declare class NgHooks {
+export declare class Hooks {
     hook_sets: string[];
     hooks: any;
     constructor();

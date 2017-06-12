@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { NgController } from "./ng-controller";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { NgController } from './ngcontroller';
 
 export interface NavItemProps {
     /* -- Name the item -- */
@@ -9,7 +9,7 @@ export interface NavItemProps {
     /* -- Starting point -- */
     startingPoint? : boolean;
 
-    /* -- Use this navitem as the first selected item wehn entering a navgroup, takes priority over historyItem -- */
+    /* -- Use this navitem as the first selected item when entering a navgroup, takes priority over historyItem -- */
     entryPoint?    : boolean;
 
     /* -- class name to use when active -- */

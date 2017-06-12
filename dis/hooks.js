@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NgHooks = (function () {
-    function NgHooks() {
+var Hooks = (function () {
+    function Hooks() {
         this.hook_sets = [
             'custom',
         ];
@@ -9,7 +9,7 @@ var NgHooks = (function () {
             'custom': {},
         };
     }
-    NgHooks.prototype.set = function (hook_info) {
+    Hooks.prototype.set = function (hook_info) {
         if (hook_info === void 0) { hook_info = null; }
         if (typeof hook_info === 'object') {
             if (hook_info.hasOwnProperty('hook_name') && hook_info.hasOwnProperty('method')) {
@@ -20,7 +20,7 @@ var NgHooks = (function () {
             }
         }
     };
-    NgHooks.prototype.call = function (hook_name, args) {
+    Hooks.prototype.call = function (hook_name, args) {
         if (hook_name === void 0) { hook_name = null; }
         if (args === void 0) { args = null; }
         if (hook_name) {
@@ -35,7 +35,7 @@ var NgHooks = (function () {
             }
         }
     };
-    NgHooks.prototype.get_hook_set_from_name = function (hook_name) {
+    Hooks.prototype.get_hook_set_from_name = function (hook_name) {
         if (hook_name === void 0) { hook_name = null; }
         var hook_set = this.hook_sets[0];
         var potential_sets = {
@@ -55,7 +55,7 @@ var NgHooks = (function () {
             name: hook_name.replace(hook_set + ':', '')
         };
     };
-    NgHooks.prototype.initiate_hook = function (hook_set, hook_name, hook_info) {
+    Hooks.prototype.initiate_hook = function (hook_set, hook_name, hook_info) {
         if (hook_set === void 0) { hook_set = null; }
         if (hook_name === void 0) { hook_name = null; }
         if (hook_info === void 0) { hook_info = null; }
@@ -64,7 +64,7 @@ var NgHooks = (function () {
             'method': hook_info.method
         };
     };
-    return NgHooks;
+    return Hooks;
 }());
-exports.NgHooks = NgHooks;
-//# sourceMappingURL=ng-hooks.js.map
+exports.Hooks = Hooks;
+//# sourceMappingURL=hooks.js.map

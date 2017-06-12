@@ -5,7 +5,7 @@
  * Developer can also set hooks for complainants callback function
  ------------------------------------------------------
 */
-export class NgHooks {
+export class Hooks {
 
     /*------------------------------------------------------
     * @array

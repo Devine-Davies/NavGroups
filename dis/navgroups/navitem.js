@@ -11,14 +11,14 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var ng_controller_1 = require("./ng-controller");
+var ngcontroller_1 = require("./ngcontroller");
 var NavItem = (function (_super) {
     __extends(NavItem, _super);
     function NavItem() {
         var _this = _super.call(this) || this;
         _this.navitem = null;
         _this.nav_item_name = null;
-        _this._NgController = ng_controller_1.NgController;
+        _this._NgController = ngcontroller_1.NgController;
         return _this;
     }
     NavItem.prototype.get_active_class_name = function () { return (this.props.activeClassName) ? this.props.activeClassName : 'active'; };
@@ -81,4 +81,4 @@ var NavItem = (function (_super) {
     return NavItem;
 }(React.Component));
 exports.NavItem = NavItem;
-//# sourceMappingURL=nav-item.js.map
+//# sourceMappingURL=navitem.js.map

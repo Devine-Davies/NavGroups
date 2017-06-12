@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NgController, NavGroup, NavItem } from "../index";
+import { NgController, NavGroup, NavItem } from "../src/index";
 
 const App = () => (
 
