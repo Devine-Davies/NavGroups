@@ -1,7 +1,7 @@
 module.exports = {
-    entry: "./example/index.tsx",
+    entry: "./playground/index.tsx",
     output: {
-        path     : __dirname + '/example/',
+        path     : __dirname + '/playground/',
         filename : 'index.js',
     },
     devtool: "source-map",
