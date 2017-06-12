@@ -73,9 +73,9 @@ ReactDOM.render(<App />, document.getElementById("example") );
 Action props define what type of interaction you want the navgroup/navitem and every action needs an instruction. The **Example below** show's how these actions are binded to either the NavGroup and NavItem components.
 
 ```javascript
-    <NavGroup name="movie-list" onLeft="" >
-        <NavItem onLeft="" onDown="" >Movie .01</NavItem>
-    </NavGroup>
+<NavGroup name="movie-list" onLeft="" >
+    <NavItem onLeft="" onDown="" >Movie .01</NavItem>
+</NavGroup>
 ```
 
 ### Action Props
@@ -140,4 +140,4 @@ NgController.run_instructions( 'ng:menu|ni:profile' )
 **Rhys Devine-Davies** - [Profile](http://www.mrdevinedavies.co.uk)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details`
