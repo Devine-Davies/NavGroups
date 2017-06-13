@@ -83,14 +83,14 @@ Action props define what type of interaction you want the navgroup/navitem and e
 
 ### Action Props
 
-| Action prop       | Avalable | Description                                                           |
-|------------------ |----------|-----------------------------------------------------------------------|
-| onEnter           | NG & NI  | Triggerd when the enterkey (↵) is invoked                             |
-| onBack            | NG & NI  | Triggerd when the backkey (←) is invoked                              |
-| onUp              | NG & NI  | Triggerd whenn the up arrow key (▲) or **W** is invoked               |
-| onRight           | NG & NI  | Triggerd when the right arrow key(►) or **D** is invoked              |
-| onDown            | NG & NI  | Triggerd when the down arrow key(▼) or **S** is invoked               |
-| onLeft            | NG & NI  | Triggerd when the left aorrow key(◄) or **A**  is invoked             |
+| Action prop       | Avalable | Description                                 |
+|------------------ |----------|---------------------------------------------|
+| onEnter           | NG & NI  | Invoked via the enterkey (↵)                |
+| onBack            | NG & NI  | Invoked via the backkey (←) is invoked      |
+| onUp              | NG & NI  | Invoked via the up arrow key (▲) or **W**   |
+| onRight           | NG & NI  | Invoked via the right arrow key(►) or **D** |
+| onDown            | NG & NI  | Invoked via the down arrow key(▼) or **S**  |
+| onLeft            | NG & NI  | Invoked via the left aorrow key(◄) or **A** |
 
 **Default actions** are applied and change occordadly depending on the direction of navgroup.
 
