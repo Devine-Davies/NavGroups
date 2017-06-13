@@ -1,0 +1,44 @@
+{
+  "name": "ng-showcase",
+  "version": "0.0.0",
+  "description": "NG Showcase",
+  "author": "Rhys Devine-Davies <rhysdevine@gmail.com> (https://mrdevinedavies.co.uk)",
+  "main": "dis/index.js",
+  "typings": "index",
+  "scripts": {
+    "serve": "webpack -w"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "autodts": "0.0.6",
+    "inversify": "^3.0.0-rc.2",
+    "navgroups": "0.0.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-injector": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.0",
+    "@types/react": "^0.14.55",
+    "@types/react-dom": "^0.14.19",
+    "@types/reflect-metadata": "0.0.5",
+    "awesome-typescript-loader": "^3.0.0-beta.17",
+    "babel-plugin-transform-react-jsx": "^6.22.0",
+    "nodemon": "^1.11.0",
+    "source-map-loader": "^0.1.5",
+    "ts-node": "^2.0.0",
+    "typescript": "^2.1.5",
+    "webpack": "^2.6.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devine-Davies/NavGroups.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Devine-Davies/NavGroups/issues"
+  },
+  "homepage": "https://github.com/Devine-Davies/NavGroups#readme"
+}
