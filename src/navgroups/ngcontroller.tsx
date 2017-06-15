@@ -1,5 +1,5 @@
 declare var document : any;
-import { Hooks } from './../hooks';
+import { Hooks } from './../core/hooks';
 
 export class _NgController extends Hooks {
 
