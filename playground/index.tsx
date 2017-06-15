@@ -115,11 +115,8 @@ const App = () => (
 
 window.onload = function(e){ 
 
-    NgController.set( {
-        'hook_name' : 'hook:install-game',
-        'method'    : ( args : any ) => { 
-            console.log( args );
-        }
+    NgController.set('hook:install-game',  ( args : any ) => { 
+        console.log( args );
     });
 
 }

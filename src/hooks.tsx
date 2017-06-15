@@ -11,16 +11,11 @@ export class Hooks {
     * @array
     * Place to store all custom method
     */
-    hook_sets : string[] = [
-        'custom',
-    ];
-
-    /*------------------------------------------------------
-    * @array
-    * Place to store all custom method
-    */
     hooks : any = {
         'custom'   : {},
+        'd-hook'   : {}, 
+        'c-hook'   : {}, 
+        'cwc-hook' : {}
     };
 
     /*------------------------------------------------------
@@ -33,26 +28,20 @@ export class Hooks {
     * @function
     * Create custom methods
     */
-    public  set( hook_info : any = null )
+    public set( name : string = null, cb : any = null )
     {
-        /* -- Has to be object -- */
-        if( typeof hook_info === 'object' )
+        /* -- need a name and callback function -- */
+        if( name && cb )
         {
-            /* -- need a hook name and method -- */
-            if( hook_info.hasOwnProperty('hook_name') && hook_info.hasOwnProperty('method') )
-            {
-                /* -- Name not be be empty -- */
-                if( hook_info.hook_name != '' && ( typeof hook_info.method == 'function' ) )
-                {  
-                    let hook_set_and_name : any = this.get_hook_set_from_name( hook_info.hook_name );
+            /* -- Name not be be empty -- */
+            if( name != '' && ( typeof cb == 'function' ) )
+            {  
+                let hook_set_and_name : any = this.get_hook_set_from_name( name );
 
-                    this.initiate_hook(
-                        hook_set_and_name.set,
-                        hook_set_and_name.name,
-                        hook_info,
-                    );
+                this.initiate(
+                    hook_set_and_name.set, hook_set_and_name.name, cb,
+                );
 
-                }
             }
         }
     }
@@ -69,18 +58,13 @@ export class Hooks {
 
             if( this.hooks[ hook_data.set ].hasOwnProperty( hook_data.name ) )
             {
-                if( args )
-                {
-                    this.hooks[ hook_data.set ][ hook_data.name ].method( args );
-                }
-                else
-                {
-                    this.hooks[ hook_data.set ][ hook_data.name ].method( );
+                if( args ) {
+                    this.hooks[ hook_data.set ][ hook_data.name ]( args );
+                } else {
+                    this.hooks[ hook_data.set ][ hook_data.name ]( );
                 }
             }
-
         }   
-
     }
 
     /*------------------------------------------------------
@@ -89,26 +73,16 @@ export class Hooks {
     */
     private get_hook_set_from_name( hook_name : string = null ) : any
     {
-        let hook_set : string = this.hook_sets[ 0 ];
+        let sets : string[] = this.get_all_sets();
+        let set  : string   = sets[0];
 
-        let potential_sets : any = {
-            'custom'   : hook_name.includes('hook'),
-            'd-hook'   : hook_name.includes('d-hook'),
-            'c-hook'   : hook_name.includes('c-hook'),
-            'cwc-hook' : hook_name.includes('cwc-hook'),
-        };
-
-        for( let set of this.hook_sets )
+        for( let potential_sets of sets )
         {
-            if( hook_name.includes( set ) )
-            {
-                hook_set = set;
-            }
+            set = ( hook_name.includes( set ) )? potential_sets : set
         }
 
         return {
-            set  : hook_set,
-            name : hook_name.replace( hook_set + ':' , '' )
+            set  : set, name : hook_name.replace( set + ':' , '' )
         }
     }
 
@@ -116,12 +90,21 @@ export class Hooks {
     * @function - Create reserved hook
     * @info     - Creates a reserved CWC hook
     */
-    private initiate_hook( hook_set : string = null, hook_name : string = null, hook_info : any = null )
+    private initiate( set : string = null, name : string = null, cb : any = null)
     {
-        this.hooks[ hook_set ][ hook_name ] = {
-            'hook_name': hook_info.hook_name,
-            'method'   : hook_info.method
-        };
+        this.hooks[ set ][ name ] = cb;
+    }
+
+    /*------------------------------------------------------
+    -- */
+    private get_all_sets() : string[]
+    {
+        let sets: string[] = [];
+
+        for( let set in this.hooks )
+            sets.push( set );
+
+        return sets;
     }
 
 }

@@ -1,9 +1,9 @@
 export declare class Hooks {
-    hook_sets: string[];
     hooks: any;
     constructor();
-    set(hook_info?: any): void;
+    set(name?: string, cb?: any): void;
     call(hook_name?: string, args?: any): void;
     private get_hook_set_from_name(hook_name?);
-    private initiate_hook(hook_set?, hook_name?, hook_info?);
+    private initiate(set?, name?, cb?);
+    private get_all_sets();
 }
