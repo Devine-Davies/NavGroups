@@ -9,123 +9,181 @@ const App = () => (
 
     <div className='window' >
 
-        <aside className="top-menu">
+        <section className="top-pane-container">
 
-            <h2>Now On Tv</h2>
+                <NavGroup name="info-bar" >
 
-            <NavGroup name="menu" >
+                    <NavItem>Rain 20&deg;c</NavItem>
 
-                <NavItem>
-                    <i className="fa fa-search"></i>
+                    <NavItem >15:43pm</NavItem>
+
+                    <NavItem onDown="ng:last" > Rhys Devine-Davies</NavItem>
+
+                </NavGroup>
+
+        </section>
+
+        <section className="menu-container" >
+
+            <NavGroup name="global-menu" onUp="ng:info-bar|ni:first" onDown="ng:list-one" indicateActiveItem >
+
+                <NavItem name="ni-1" startingPoint >My session</NavItem>
+
+                <NavItem name="ni-2" >Movies</NavItem>
+
+                <NavItem name="ni-3" >Music</NavItem>
+
+                <NavItem name="ni-4" >TV</NavItem>
+
+                <NavItem name="ni-5" onRight="ng:social-menu" >Movies</NavItem>
+
+            </NavGroup>
+
+            <NavGroup name="social-menu" onUp="ng:info-bar|ni:last" indicateActiveItem >
+
+                <NavItem name="ni-1" onLeft="ng:global-menu" ><i className="fa fa-github" ></i></NavItem>
+
+                <NavItem name="ni-2" > <i className="fa fa-linkedin"></i></NavItem>
+
+                <NavItem name="ni-3" > <i className="fa fa-search"></i> </NavItem>
+
+            </NavGroup>
+
+        </section>
+
+        <section className="body-container" >
+            <NavGroup name="list-one" onUp="ng:global-menu" >
+                <NavItem name="ni-1" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
                 </NavItem>
 
-                <NavItem>Now On Tv</NavItem>
-
-                <NavItem startingPoint >Channels</NavItem>
-
-                <NavItem>Apps</NavItem>
-
-                <NavItem>Movies On Demand</NavItem>
-
-                <NavItem >Online TV Sources</NavItem>
-
-            </NavGroup>
-
-        </aside>
-
-        {/*<div className='body'  >
-
-            <NavGroup historyItem >
-
-                <NavItem onEnter="ng:inner-group" onLeft="ng:menu"  >
-
-                    <p>Nested groups <br/> (enter to go inside) </p>
-
-                    <NavGroup name="inner-group" onBack="ng:last|ni:5" >
-
-                        <NavItem onLeft="ng:last|ni:1" >Item</NavItem>
-
-                        <NavItem  onRight="ng:last|ni:2" >Item</NavItem>
-
-                    </NavGroup>
-
+                <NavItem name="ni-2" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
                 </NavItem>
 
-                <NavItem onEnter="ng:inner-group2" >
-
-                    <p>Nested groups <br/> (enter to go inside) </p>
-
-                    <NavGroup name="inner-group2" onBack="ng:last|ni:2" >
-
-                        <NavItem onLeft="ng:last|ni:5" >Item</NavItem>
-
-                        <NavItem >Item</NavItem>
-
-                        <NavItem onRight="ng:section-2|ni:first" >Item</NavItem>
-
-                    </NavGroup>
-
+                <NavItem name="ni-3" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
                 </NavItem>
 
+                <NavItem name="ni-4" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
+
+                <NavItem name="ni-5" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
             </NavGroup>
 
-            <NavGroup name="section-2" indicateActiveItem  >
+            <NavGroup name="list-two" onUp="ng:list-one" >
+                <NavItem name="ni-1" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
 
-                <NavItem onLeft="ng:menu" >Item</NavItem>
+                <NavItem name="ni-2" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
 
-                <NavItem onEnter="ng:inner-group|ni:2" >Item</NavItem>
+                <NavItem name="ni-3" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
 
-                <NavItem startingPoint onRight="ni:last" >goto End</NavItem>
+                <NavItem name="ni-4" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
 
-                <NavItem >Item</NavItem>
-
-                <NavItem >Item</NavItem>
-
-                <NavItem onRight="" name="boom" >End</NavItem>
-
+                <NavItem name="ni-5" >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img"></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
             </NavGroup>
-
-            <NavGroup name="with-hook" >
-
-                <NavItem onLeft="ng:menu" >Item</NavItem>
-
-                <NavItem entryPoint onBack='hook:install-game' >Entry item</NavItem>
-
-                <NavItem >Item</NavItem>
-
-                <NavItem name="hook-item" onEnter="hook:my-custom-hook" >Hook</NavItem>
-
-                <NavItem >Item</NavItem>
-
-                <NavItem onRight="" >Item</NavItem>
-
-            </NavGroup>
-
-            <NavGroup >
-
-                <NavItem onLeft="ng:menu" >Item</NavItem>
-
-                <NavItem entryPoint >Entry item</NavItem>
-
-                <NavItem >Item</NavItem>
-
-                <NavItem name="hook-item" onEnter="hook:my-custom-hook" >Hook</NavItem>
-
-                <NavItem >Item</NavItem>
-
-                <NavItem onRight="" >Item</NavItem>
-
-            </NavGroup>
-
-        </div>*/}
-
+        </section>
+    
     </div>
 );
 
 window.onload = function(e){ 
 
     NgController.set('install-game',  ( args : any ) => { 
-        console.log( args );
+        console.log( args )
     });
 
 }
