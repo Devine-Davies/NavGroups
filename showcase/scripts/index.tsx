@@ -2,29 +2,38 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { NgController, NavGroup, NavItem } from "navgroups";
 
+// Stylesheets
+import "../scss/main.scss";
+
 const App = () => (
 
     <div className='window' >
 
-        <aside className="side-menu">
+        <aside className="top-menu">
 
-            <NavGroup name="menu" direction="vertical" onLeft="" onRight="ng:last"  >
+            <h2>Now On Tv</h2>
 
-                <NavItem>Home</NavItem>
+            <NavGroup name="menu" >
 
-                <NavItem>Movies</NavItem>
+                <NavItem>
+                    <i className="fa fa-search"></i>
+                </NavItem>
 
-                <NavItem>Music</NavItem>
+                <NavItem>Now On Tv</NavItem>
 
-                <NavItem>Profile</NavItem>
+                <NavItem startingPoint >Channels</NavItem>
 
-                <NavItem >Setting</NavItem>
+                <NavItem>Apps</NavItem>
+
+                <NavItem>Movies On Demand</NavItem>
+
+                <NavItem >Online TV Sources</NavItem>
 
             </NavGroup>
 
         </aside>
 
-        <div className='body'  >
+        {/*<div className='body'  >
 
             <NavGroup historyItem >
 
@@ -108,7 +117,7 @@ const App = () => (
 
             </NavGroup>
 
-        </div>
+        </div>*/}
 
     </div>
 );

@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300);body {
+  background: #ECE9E6;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Work Sans', sans-serif;
+  margin: 0; }
+  body .window {
+    display: flex;
+    flex-direction: column; }
+
+.window .top-menu {
+  width: 15%;
+  padding: 0 2vw;
+  width: calc(100% - 4vw);
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  background: #f1eded; }
+  .window .top-menu h2 {
+    width: 100%;
+    margin: 0;
+    font-size: 7vh;
+    font-weight: 300;
+    position: relative;
+    left: -5px; }
+  .window .top-menu .nav-group {
+    /*flex-direction: column;*/
+    width: 60%;
+    display: flex;
+    justify-content: space-between; }
+    .window .top-menu .nav-group .nav-item {
+      font-size: 1.4vw; }
+      .window .top-menu .nav-group .nav-item.active {
+        text-decoration: underline; }
+
+.window .body {
+  margin: 0 auto;
+  display: none; }
+
+.nav-group {
+  text-align: center;
+  display: flex;
+  width: 100%; }
+
+.nav-item {
+  /*display: inline;
+    min-width: 75px;
+    line-height: 75px;
+    border: 5px solid rgba(255, 0, 0, 0.16);
+    margin: 1rem;
+    padding: 1rem;
+    transition: all 0.3s ease;*/ }
+
+/*# sourceMappingURL=main.css.map*/
