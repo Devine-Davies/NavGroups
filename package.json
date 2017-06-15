@@ -1,13 +1,13 @@
 {
   "name": "navgroups",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "NavGroup is a flexible and powerful react component for creating UI navigation base around big screen tv's. It allows you to quickly map out a web layout that can be controlled via a keyboard, similar to the type of experience you might find on tv's.",
   "author": "Rhys Devine-Davies <rhysdevine@gmail.com> (https://mrdevinedavies.co.uk)",
-  "main": "dis/index.js",
+  "main": "lib/index.js",
   "typings": "index",
   "scripts": {
-    "dev"  : "webpack -w",
-    "make" : "rm -r ./dis && tsc && autodts generate"
+    "dev"  : "rm -r ./lib && webpack -w",
+    "make" : "rm -r ./lib && tsc && autodts generate"
   },
   "license": "ISC",
   "dependencies": {
@@ -30,7 +30,7 @@
     "webpack": "^2.6.0"
   },
   "directories": {
-    "example": "example"
+    "example": "playground"
   },
   "repository": {
     "type": "git",

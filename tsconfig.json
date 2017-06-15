@@ -10,7 +10,7 @@
         "emitDecoratorMetadata": true,
         "jsx": "react",
         "module": "commonjs",
-        "outDir": "./dis",
+        "outDir": "./lib",
         "declaration" : true
     },
     "include": [
