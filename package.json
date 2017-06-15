@@ -6,10 +6,8 @@
   "main": "dis/index.js",
   "typings": "index",
   "scripts": {
-    "dev": "webpack -w",
-    "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.tsx",
-    "prepublish": "rm -r ./dis && tsc && autodts generate"
+    "dev"  : "webpack -w",
+    "make" : "rm -r ./dis && tsc && autodts generate"
   },
   "license": "ISC",
   "dependencies": {
@@ -26,7 +24,6 @@
     "@types/reflect-metadata": "0.0.5",
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "babel-plugin-transform-react-jsx": "^6.22.0",
-    "nodemon": "^1.11.0",
     "source-map-loader": "^0.1.5",
     "ts-node": "^2.0.0",
     "typescript": "^2.1.5",

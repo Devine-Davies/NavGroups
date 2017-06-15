@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var hooks_1 = require("./../hooks");
+var hooks_1 = require("./../core/hooks");
 var _NgController = (function (_super) {
     __extends(_NgController, _super);
     function _NgController() {
