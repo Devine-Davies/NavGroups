@@ -102,21 +102,27 @@
         transform: scale(1.5); }
 
 .window .body-container {
-  padding: 2vw; }
+  padding: 1vw 2vw; }
+  .window .body-container .list-one {
+    margin-bottom: 1vw; }
   .window .body-container .list-one, .window .body-container .list-two {
     justify-content: space-between; }
+    .window .body-container .list-one .ni-list-container, .window .body-container .list-two .ni-list-container {
+      display: flex;
+      justify-content: space-between; }
     .window .body-container .list-one .nav-item, .window .body-container .list-two .nav-item {
-      transform: scale(0.9);
       transition: all .2s ease-in-out; }
+      .window .body-container .list-one .nav-item.ni-1 .poster-container, .window .body-container .list-two .nav-item.ni-1 .poster-container {
+        padding-left: 0; }
+      .window .body-container .list-one .nav-item.ni-5 .poster-container, .window .body-container .list-two .nav-item.ni-5 .poster-container {
+        padding-right: 0; }
       .window .body-container .list-one .nav-item.active, .window .body-container .list-two .nav-item.active {
-        transform: scale(1); }
+        transform: scale(1.1); }
 
 .poster-container {
   display: block;
-  width: 375px;
-  margin: 0.5em 0; }
+  padding: 1vw 2vw; }
   .poster-container .poster {
-    border-radius: 10px;
     overflow: hidden;
     box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2); }
     .poster-container .poster__img {
@@ -124,7 +130,8 @@
       background-color: #f1eded;
       background-position: center;
       background-size: cover;
-      width: 100%; }
+      width: 100%;
+      background-position: top; }
     .poster-container .poster__info {
       background: #fff;
       padding: 0.5em; }
@@ -136,6 +143,21 @@
     .poster-container .poster__text {
       font-size: .8em;
       color: #999;
-      font-weight: 300; }
+      font-weight: 300;
+      margin-top: 0;
+      margin-bottom: 0;
+      position: relative; }
+      .poster-container .poster__text:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #2098d1;
+        transform: scaleX(1);
+        transform-origin: 0 50%;
+        transition: transform .3s ease-out; }
 
 /*# sourceMappingURL=main.css.map*/

@@ -126,29 +126,36 @@ body {
 }
 
 .window .body-container {
-    padding: 2vw;
+    padding: 1vw 2vw;
+
+    .list-one {
+        margin-bottom: 1vw;
+    }
 
     .list-one, .list-two {
         justify-content: space-between;
 
-        .nav-item {
-            transform: scale( 0.9 );
-            transition: all .2s ease-in-out; 
+        .ni-list-container {
+            display: flex;
+            justify-content: space-between;
+        }
 
-            &.active {
-                transform: scale( 1 );
-            }
+        .nav-item {
+            transition: all .2s ease-in-out; 
+            
+            &.ni-1 { .poster-container { padding-left: 0; } }
+            &.ni-5 { .poster-container { padding-right: 0; } }
+
+            &.active { transform: scale( 1.1 ); }
         }
     }
 }
 
 .poster-container {
     display: block;
-    width: 375px;
-    margin: 0.5em 0;
+    padding: 1vw 2vw;
 
     .poster {
-        border-radius: 10px;
         overflow: hidden;
         box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2);
 
@@ -158,6 +165,7 @@ body {
             background-position: center;
             background-size: cover;
             width: 100%;
+            background-position: top;
         }
 
         &__info {
@@ -176,6 +184,20 @@ body {
             font-size: .8em;
             color: #999;
             font-weight: 300;
+            margin-top: 0;
+            margin-bottom: 0;
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                z-index:-1;
+                top: 0;  left: 0;  right: 0;  bottom: 0;
+                background: #2098d1;
+                transform: scaleX(1);
+                transform-origin: 0 50%;
+                transition: transform .3s ease-out;
+            }
         }
     }
 }

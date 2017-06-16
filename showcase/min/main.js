@@ -9821,6 +9821,16 @@ module.exports = __webpack_require__(118);
 
 "use strict";
 
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(32);
 var ReactDOM = __webpack_require__(84);
@@ -9831,14 +9841,15 @@ var App = function () { return (React.createElement("div", { className: 'window'
         React.createElement(navgroups_1.NavGroup, { name: "info-bar" },
             React.createElement(navgroups_1.NavItem, null, "Rain 20\u00B0c"),
             React.createElement(navgroups_1.NavItem, null, "15:43pm"),
-            React.createElement(navgroups_1.NavItem, { onDown: "ng:last" }, " Rhys Devine-Davies"))),
+            React.createElement(navgroups_1.NavItem, { onDown: "ng:last" }, "Rhys Devine-Davies"))),
     React.createElement("section", { className: "menu-container" },
         React.createElement(navgroups_1.NavGroup, { name: "global-menu", onUp: "ng:info-bar|ni:first", onDown: "ng:list-one", indicateActiveItem: true },
-            React.createElement(navgroups_1.NavItem, { name: "ni-1", startingPoint: true }, "My session"),
-            React.createElement(navgroups_1.NavItem, { name: "ni-2" }, "Movies"),
-            React.createElement(navgroups_1.NavItem, { name: "ni-3" }, "Music"),
-            React.createElement(navgroups_1.NavItem, { name: "ni-4" }, "TV"),
-            React.createElement(navgroups_1.NavItem, { name: "ni-5", onRight: "ng:social-menu" }, "Movies")),
+            React.createElement(navgroups_1.NavItem, { name: "ni-1", startingPoint: true }, "Movies"),
+            React.createElement(navgroups_1.NavItem, { name: "ni-2" }, "Music"),
+            React.createElement(navgroups_1.NavItem, { name: "ni-3" }, "Games"),
+            React.createElement(navgroups_1.NavItem, { name: "ni-4" }, "Photos"),
+            React.createElement(navgroups_1.NavItem, { name: "ni-5" }, "Apps"),
+            React.createElement(navgroups_1.NavItem, { name: "ni-6", onRight: "ng:social-menu" }, "Internet")),
         React.createElement(navgroups_1.NavGroup, { name: "social-menu", onUp: "ng:info-bar|ni:last", indicateActiveItem: true },
             React.createElement(navgroups_1.NavItem, { name: "ni-1", onLeft: "ng:global-menu" },
                 React.createElement("i", { className: "fa fa-github" })),
@@ -9851,82 +9862,40 @@ var App = function () { return (React.createElement("div", { className: 'window'
                 " "))),
     React.createElement("section", { className: "body-container" },
         React.createElement(navgroups_1.NavGroup, { name: "list-one", onUp: "ng:global-menu" },
-            React.createElement(navgroups_1.NavItem, { name: "ni-1" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-2" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-3" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-4" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-5" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ")))))),
+            React.createElement(BodyList, null)),
         React.createElement(navgroups_1.NavGroup, { name: "list-two", onUp: "ng:list-one" },
-            React.createElement(navgroups_1.NavItem, { name: "ni-1" },
+            React.createElement(BodyList, null))))); };
+var BodyList = (function (_super) {
+    __extends(BodyList, _super);
+    function BodyList() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.movies = [
+            'https://s-media-cache-ak0.pinimg.com/originals/29/e3/59/29e3598aca677b4bda6874152bcfe9cf.jpg',
+            'https://s-media-cache-ak0.pinimg.com/736x/59/12/0f/59120f2a65fd05a78d9d450039a85a58.jpg',
+            'https://s-media-cache-ak0.pinimg.com/736x/fa/78/ee/fa78eeffd9bd0ede0f8024b8910f669c.jpg',
+            'https://s-media-cache-ak0.pinimg.com/originals/29/e3/59/29e3598aca677b4bda6874152bcfe9cf.jpg',
+            'https://s-media-cache-ak0.pinimg.com/736x/59/12/0f/59120f2a65fd05a78d9d450039a85a58.jpg'
+        ];
+        return _this;
+    }
+    BodyList.prototype.render = function () {
+        return (React.createElement("div", { className: "ni-list-container" }, this.movies.map(function (cover, index) {
+            var name = "ni-" + index;
+            var onDown = "ng:next|ni:" + index;
+            return React.createElement(navgroups_1.NavItem, { name: name },
                 React.createElement("div", { className: "poster-container" },
                     React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
+                        React.createElement("div", { className: "poster__img", style: { backgroundImage: "url(" + cover + ")" } }),
                         React.createElement("div", { className: "poster__info" },
                             React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-2" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-3" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-4" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))),
-            React.createElement(navgroups_1.NavItem, { name: "ni-5" },
-                React.createElement("div", { className: "poster-container" },
-                    React.createElement("div", { className: "poster" },
-                        React.createElement("div", { className: "poster__img" }),
-                        React.createElement("div", { className: "poster__info" },
-                            React.createElement("h1", { className: "poster__title" }, "Movie Title"),
-                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. "))))))))); };
-window.onload = function (e) {
-    navgroups_1.NgController.set('install-game', function (args) {
-        console.log(args);
-    });
-};
+                            React.createElement("p", { className: "poster__text" }, "Lorem Ipsum is simply dummy text of")))));
+        })));
+    };
+    return BodyList;
+}(React.Component));
+navgroups_1.NgController.set('install-game', function (args) {
+    console.log(args);
+});
 ReactDOM.render(React.createElement(App, null), document.getElementById("example"));
 
 

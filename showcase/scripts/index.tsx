@@ -17,7 +17,7 @@ const App = () => (
 
                     <NavItem >15:43pm</NavItem>
 
-                    <NavItem onDown="ng:last" > Rhys Devine-Davies</NavItem>
+                    <NavItem onDown="ng:last" >Rhys Devine-Davies</NavItem>
 
                 </NavGroup>
 
@@ -27,15 +27,17 @@ const App = () => (
 
             <NavGroup name="global-menu" onUp="ng:info-bar|ni:first" onDown="ng:list-one" indicateActiveItem >
 
-                <NavItem name="ni-1" startingPoint >My session</NavItem>
+                <NavItem name="ni-1" startingPoint >Movies</NavItem>
 
-                <NavItem name="ni-2" >Movies</NavItem>
+                <NavItem name="ni-2" >Music</NavItem>
 
-                <NavItem name="ni-3" >Music</NavItem>
+                <NavItem name="ni-3" >Games</NavItem>
 
-                <NavItem name="ni-4" >TV</NavItem>
+                <NavItem name="ni-4" >Photos</NavItem>
 
-                <NavItem name="ni-5" onRight="ng:social-menu" >Movies</NavItem>
+                <NavItem name="ni-5" >Apps</NavItem>
+
+                <NavItem name="ni-6" onRight="ng:social-menu" >Internet</NavItem>
 
             </NavGroup>
 
@@ -53,139 +55,58 @@ const App = () => (
 
         <section className="body-container" >
             <NavGroup name="list-one" onUp="ng:global-menu" >
-                <NavItem name="ni-1" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-2" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-3" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-4" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-5" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
+                <BodyList/>
             </NavGroup>
 
             <NavGroup name="list-two" onUp="ng:list-one" >
-                <NavItem name="ni-1" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-2" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-3" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-4" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
-
-                <NavItem name="ni-5" >
-                    <div className="poster-container">
-                        <div className="poster">
-                            <div className="poster__img"></div>
-                            <div className="poster__info">
-                            <h1 className="poster__title">Movie Title</h1>
-                            <p className="poster__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            </div>
-                        </div>
-                    </div>
-                </NavItem>
+                <BodyList />
             </NavGroup>
         </section>
     
     </div>
 );
 
-window.onload = function(e){ 
-
-    NgController.set('install-game',  ( args : any ) => { 
-        console.log( args )
-    });
-
+interface Props {
+  name?: string;
 }
+
+class BodyList extends React.Component<Props, {}> {
+
+    movies = [
+        'https://s-media-cache-ak0.pinimg.com/originals/29/e3/59/29e3598aca677b4bda6874152bcfe9cf.jpg',
+        'https://s-media-cache-ak0.pinimg.com/736x/59/12/0f/59120f2a65fd05a78d9d450039a85a58.jpg',
+        'https://s-media-cache-ak0.pinimg.com/736x/fa/78/ee/fa78eeffd9bd0ede0f8024b8910f669c.jpg',
+        'https://s-media-cache-ak0.pinimg.com/originals/29/e3/59/29e3598aca677b4bda6874152bcfe9cf.jpg',
+        'https://s-media-cache-ak0.pinimg.com/736x/59/12/0f/59120f2a65fd05a78d9d450039a85a58.jpg'
+    ];
+
+    render() 
+    {
+        return ( <div className="ni-list-container" >{ this.movies.map(function(cover, index){
+
+                let name   : string = `ni-${index}`;
+                let onDown : string = `ng:next|ni:${index}`;
+
+                return <NavItem name={name} >
+                    <div className="poster-container">
+                        <div className="poster">
+                            <div className="poster__img" style={{backgroundImage: `url(${cover})`}} ></div>
+                            <div className="poster__info">
+                            <h1 className="poster__title">Movie Title</h1>
+                            <p className="poster__text">Lorem Ipsum is simply dummy text of</p>
+                            </div>
+                        </div>
+                    </div>
+                </NavItem>
+            })}
+        </div> );
+    }    
+}
+
+// window.onload = function(e){ 
+NgController.set('install-game',  ( args : any ) => { 
+    console.log( args )
+});
+// }
 
 ReactDOM.render(<App />, document.getElementById("example") );
