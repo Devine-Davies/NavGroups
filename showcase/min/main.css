@@ -14,18 +14,27 @@
   display: flex;
   width: 100%; }
 
-.window .top-pane-container {
-  width: 15%;
+.window .top-container {
+  height: 20vh;
   padding: 0 2vw;
-  width: calc(100% - 4vw);
+  background-color: #f1eded;
+  display: flex;
+  align-items: center;
+  flex-flow: wrap; }
+
+.window .body-container {
+  height: 76vh;
+  padding: 2vw 2vw; }
+
+.window .top-pane-container {
   display: flex;
   align-items: center;
   flex-flow: wrap;
-  background-color: #f1eded; }
+  width: 100%; }
   .window .top-pane-container .info-bar {
     width: 100%;
     justify-content: space-between;
-    padding: 4vh 0; }
+    padding: 2vh 0; }
     .window .top-pane-container .info-bar .nav-item {
       font-size: 1.4vw;
       position: relative; }
@@ -40,9 +49,11 @@
         top: 0; }
 
 .window .menu-container {
-  padding: 2vw;
   position: relative;
-  background-color: #f1eded; }
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4vh; }
   .window .menu-container .global-menu {
     width: 60%;
     justify-content: space-between; }
@@ -56,6 +67,8 @@
       background-color: #32742C; }
     .window .menu-container .global-menu.ni-5 .nav-item.active:before {
       background-color: #F18D05; }
+    .window .menu-container .global-menu.ni-6 .nav-item.active:before {
+      background-color: red; }
     .window .menu-container .global-menu .nav-item {
       font-size: 1.4em;
       position: relative;
@@ -72,28 +85,24 @@
         border-color: #32742C; }
       .window .menu-container .global-menu .nav-item.ni-5:before {
         border-color: #F18D05; }
+      .window .menu-container .global-menu .nav-item.ni-6:before {
+        border-color: red; }
       .window .menu-container .global-menu .nav-item:before {
         content: '';
         display: block;
         position: absolute;
         width: 100%;
         height: 100%;
-        transform: scale(1.1, 1.4);
+        transform: scale(1.1, 1.3);
         z-index: -1;
         border-bottom: 2px solid; }
   .window .menu-container .social-menu {
     width: 10%;
-    position: absolute;
-    right: 0;
-    padding: 2vw;
-    top: 0;
     justify-content: space-between; }
     .window .menu-container .social-menu .nav-item {
       font-weight: bolder;
       transition: all .2s ease-in-out;
-      font-size: 1.5em;
-      position: relative;
-      top: -0.25em; }
+      font-size: 1.5em; }
       .window .menu-container .social-menu .nav-item.ni-2 {
         color: #0077B5; }
       .window .menu-container .social-menu .nav-item.ni-3 {
@@ -102,31 +111,30 @@
         transform: scale(1.5); }
 
 .window .body-container {
-  padding: 1vw 2vw; }
-  .window .body-container .list-one {
-    margin-bottom: 1vw; }
-  .window .body-container .list-one, .window .body-container .list-two {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .window .body-container .nav-group {
+    display: flex;
     justify-content: space-between; }
-    .window .body-container .list-one .ni-list-container, .window .body-container .list-two .ni-list-container {
-      display: flex;
-      justify-content: space-between; }
-    .window .body-container .list-one .nav-item, .window .body-container .list-two .nav-item {
+    .window .body-container .nav-group .nav-item {
+      width: 12.5%;
       transition: all .2s ease-in-out; }
-      .window .body-container .list-one .nav-item.ni-1 .poster-container, .window .body-container .list-two .nav-item.ni-1 .poster-container {
+      .window .body-container .nav-group .nav-item.ni-1 .poster-container {
         padding-left: 0; }
-      .window .body-container .list-one .nav-item.ni-5 .poster-container, .window .body-container .list-two .nav-item.ni-5 .poster-container {
+      .window .body-container .nav-group .nav-item.ni-5 .poster-container {
         padding-right: 0; }
-      .window .body-container .list-one .nav-item.active, .window .body-container .list-two .nav-item.active {
+      .window .body-container .nav-group .nav-item.active {
         transform: scale(1.1); }
 
 .poster-container {
   display: block;
-  padding: 1vw 2vw; }
+  width: 100%; }
   .poster-container .poster {
     overflow: hidden;
     box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2); }
     .poster-container .poster__img {
-      height: 200px;
+      height: 22vh;
       background-color: #f1eded;
       background-position: center;
       background-size: cover;
@@ -141,7 +149,7 @@
       margin-bottom: .2em;
       margin-top: 0; }
     .poster-container .poster__text {
-      font-size: .8em;
+      font-size: .6em;
       color: #999;
       font-weight: 300;
       margin-top: 0;
