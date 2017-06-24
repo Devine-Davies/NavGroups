@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { NgController } from './ngcontroller';
+import { NavItem } from './navitem';
 
 export interface NavGroupProps {
     /* -- Name the group -- */
@@ -130,7 +131,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
             this
         );
 
-        for (let ref in this.refs)
+        for ( let ref in this.refs )
         {
             let item : any = this.refs[ ref ];
 
@@ -138,7 +139,7 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
             {
                 this._NgController.append_new_nav_item(
                     this.nav_group_name, item
-                )
+                );
             }
         }
 
@@ -149,6 +150,14 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
     recursiveCloneChildren( children : any )
     {
         return React.Children.map(children, (child : any, idx ) => {
+
+            var childProps : any = {};
+
+            if ( child.props )
+            {
+                childProps.children = this.recursiveCloneChildren( child.props.children );
+            }
+
             return React.cloneElement(child, { ref: idx });
         })
     }
@@ -170,6 +179,6 @@ export class NavGroup extends React.Component<NavGroupProps, undefined> {
 
     /*------------------------------------------------------
     */
-    render() { return <div className="nav-group" ref={(ng) => { this.nav_group = ng; }}  >  { this.recursiveCloneChildren( this.props.children ) }  </div> }
+    render() { return <div className="nav-group" ref={(ng) => { this.nav_group = ng; }}  > { this.recursiveCloneChildren( this.props.children ) } </div> }
 
 }

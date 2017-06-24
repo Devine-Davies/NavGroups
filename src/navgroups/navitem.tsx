@@ -91,6 +91,8 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     -- */
     get_name()
     {
+        console.log( this );
+
         if( this.nav_item_name == null )
         {
             this.nav_item_name = ( this.props.name )? this.props.name : this.gen_random_name() ;
@@ -100,17 +102,18 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     }
 
     /*------------------------------------------------------
-    * Gens a random name for this navgitem
+    * Gens a random name for this navitem
     */
     gen_random_name()
     {
         let random_name : string = '';
 
         for( let i = 0; i < 2; i++)
+        {
             random_name += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1) + '-'
+        }
 
         return random_name.substring(0, random_name.length - 1);
-
     }
 
     /*------------------------------------------------------
@@ -149,6 +152,13 @@ export class NavItem extends React.Component<NavItemProps, undefined> {
     /*------------------------------------------------------
     * ------
     */
-    render() { return <div className="nav-item" ref={(ni) => { this.navitem = ni; }} >  { this.recursiveCloneChildren( this.props.children ) }  </div> }
+    render() { 
+        return <div className="nav-item" ref={(ni) => { 
+            this.navitem = ni; 
+            console.log( ni );
+        }} > { 
+            this.recursiveCloneChildren( this.props.children ) 
+        }  </div> 
+    }
 
 }

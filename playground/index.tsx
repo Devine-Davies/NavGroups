@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { NgController, NavGroup, NavItem } from "../src/index";
+import { NgController, NavGroup, NavItem } from "../index";
 
 const App = () => (
 
@@ -34,7 +34,7 @@ const App = () => (
 
                     <NavGroup name="inner-group" onBack="ng:last|ni:5" >
 
-                        <NavItem onLeft="ng:last|ni:1" >Item</NavItem>
+                        <NavItem name="inside" onLeft="ng:last|ni:1" >Item</NavItem>
 
                         <NavItem  onRight="ng:last|ni:2" >Item</NavItem>
 

@@ -95,12 +95,12 @@ export class _NgController extends Hooks {
 
     /*-----------------------------------------------------
     * @function: Add new nav group
-    * @info: Adds a new navgrouop to the class
+    * @info: Adds a new navgroup to the class
     * @navgroup_obj: is the class/obj of the navgroup item
     */
     public add_new_nav_group( NavGroupComp : any = null )
     {
-        /* -- Set up thje core object for the navgroup item -- */
+        /* -- Set up the core object for the navgroup item -- */
         this.navgroups[ NavGroupComp.get_name() ] = {
             'obj'           : NavGroupComp,
             'items'         : {},
@@ -108,7 +108,7 @@ export class _NgController extends Hooks {
             'selected_item' : null,
         }
 
-        /* -- Keep a record of the index in which the nagrouo come in as -- */
+        /* -- Keep a record of the index in which the navgroup come in as -- */
         this.navgroups_indexing.push(
             NavGroupComp.get_name()
         );
@@ -116,11 +116,11 @@ export class _NgController extends Hooks {
 
     /*-----------------------------------------------------
     * @function: Append new nav item
-    * @info: Adds a new navitem to an exsisting navgroup
+    * @info: Adds a new navitem to an existing navgroup
     * @conditions set: Only if Navitems found
     * -----------------------------------------------------
     * [attr] = startingPoint? : boolean; - is the main starting point of the app;
-    * [attr] = entryPoint?    : boolean; - When the new navgro is enterd, is the first item it will find;
+    * [attr] = entryPoint?    : boolean; - When the new navgroup is entered, is the first item it will find;
     */
     public append_new_nav_item( group_name : string = null, NavItemComp : any = null )
     {
@@ -201,7 +201,7 @@ export class _NgController extends Hooks {
 
     /*------------------------------------------------------
     * @function - Run instructions
-    * @info - A programatic way to call an instuction
+    * @info - A programmatic way to call an instructions
     * @instruction set - linked to analyse_instruction string
     */
     public run_instructions( instruction : string = null )
@@ -249,7 +249,7 @@ export class _NgController extends Hooks {
     | ng:{{name}}   |            | Go to the navgroup by name                                            |
     | hook:{{name}} |            | add the name of your custom hook (must be set up in custom methods  ) |
 
-    **Navitem instructions**
+    __Navitem instructions__
     | Instructions  | is default | Description                                                           |
     |---------------|------------|-----------------------------------------------------------------------|
     | ni:next       | default    | next navitem                                                          |
@@ -397,13 +397,13 @@ export class _NgController extends Hooks {
 
         /* -- prepare all the item that we could move to -- */
         let possible_moves : any = {
-            /* -- Core movments -- */
+            /* -- Core movements -- */
             'next'   : this.get_next_nav_item( active_group['selected_item'], 'next' ),
             'prev'   : this.get_next_nav_item( active_group['selected_item'], 'prev' ),
             'first'  : active_group['item_indexing'][ 0 ],
             'last'   : active_group['item_indexing'][ active_group['item_indexing'].length - 1 ],
 
-            /* -- Spechial movments -- */
+            /* -- Special movements -- */
             "move_by_name"     : this.get_item_in_group( instruction ),
             'last_selected'    : active_group['selected_item'],
             'item_entry_point' : active_group['item_entry_point']
@@ -458,7 +458,7 @@ export class _NgController extends Hooks {
         /* -- Update the navitem object -- */
         this.active_navitem = active_group['items'][ active_group['selected_item'] ].obj;
 
-        /* -- AddMake the last active item unacitve -- */
+        /* -- AddMake the last selected active item inactive -- */
         this.active_navitem.toggle_active();
 
         /* -- Add the active item name of the group class -- */

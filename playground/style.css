@@ -17,6 +17,8 @@
 .nav-group {
     text-align: center;
     display: flex;
+
+    outline: 1px solid red;
 }
 
 .nav-group.active {
