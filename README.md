@@ -2,6 +2,8 @@
 
 **In Development**
 
+_[Demo site can be found here](https://devine-davies.github.io/NavGroups/):_
+
 NavGroup is a flexible and powerful react component for creating ui navigation base around big screen TV's. It allows you to quickly map out a web layout that can be controlled via a keyboard, similar to the type of experience you might find on TV's.
 
 ##### Built With
