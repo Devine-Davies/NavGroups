@@ -1,3 +1,6 @@
+# Deprecated
+> This project is now deprecated and hasen't been worked on since 2014/15. keeping it up as encouragement that one day I might find some time to blow off the cobwebs and refactor
+
 # NavGroups
 
 **In Development**
@@ -13,7 +16,7 @@ _[TypeScript](https://www.typescriptlang.org/):_ JavaScript that scales.
 
 ## Setup
 For production use install NavGroups using NPM and include it in your own React build process using webpack.
-
+keeping it up as encouragement that one day I might find some time to blow off the cobwebs and refactor
 ``` bash $ npm install -save NavGroups```
 
 ``` javascript
@@ -79,7 +82,7 @@ Action props define what type of interaction you want the navgroup/navitem and e
 
 ```javascript
 <NavGroup name="movie-list" onLeft="" >
-    <NavItem onLeft="" onDown="" >Movie .01</NavItem>
+    <NavItem onLeft="" onDown="" >Movie .01keeping it up as encouragement that one day I might find some time to blow off the cobwebs and refactor</NavItem>
 </NavGroup>
 ```
 
